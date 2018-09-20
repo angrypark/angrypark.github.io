@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[GAN] DCGAN 논문 이해하기 | angrypark</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/">
+  <link rel="alternate" href="/atom.xml" title="angrypark">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="shortcut icon" href="" />
+  <link rel="icon" href="" />
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//cdn.bootcss.com/node-waves/0.7.5/waves.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+</head>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				<!-- <i class="fa fa-home"></i> -->
+				angrypark
+			</a>
+
+				<div class='menu'>
+					<ul class='h-list'>
+                        
+    						
+    							<li>
+    								<a class='nav-home flat-box' href='/'>
+    									<i class='fa fa-home fa-'></i>&nbsp;Home
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-projects flat-box' href='https://angrypark.github.io/projects'>
+    									<i class='fa fa-cube fa-'></i>&nbsp;Projects
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-home flat-box' href='/'>
+    									<i class='fa fa-rss fa-'></i>&nbsp;Home
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' href='/archives'>
+    									<i class='fa fa-archive fa-'></i>&nbsp;Archives
+    								</a>
+    							</li>
+    						
+        			 
+					</ul>
+					<div class='underline'></div>
+				</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon"><i class="fa fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fa fa-search fa-fw" href='javascript:void(0)'></span></a></li>
+				
+				<li class='s-menu'><a class="fa fa-navicon fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				xaoxuu
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="fa fa-comments fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-top'><a class="fa fa-arrow-up fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-toc'><a class="fa fa-list-ul fa-fw flat-box" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+        <div class="header">angrypark</div>
+		<nav>
+            <ul>
+                
+                    
+                        <li>
+                            <a class='nav-home flat-box nav flat-box' href='/'><i class='fa fa-home fa-fw'></i>&nbsp;Home</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-projects flat-box nav flat-box' href='https://angrypark.github.io/projects'><i class='fa fa-cube fa-fw'></i>&nbsp;Projects</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-home flat-box nav flat-box' href='/'><i class='fa fa-rss fa-fw'></i>&nbsp;Home</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' href='/archives'><i class='fa fa-archive fa-fw'></i>&nbsp;Archives</a>
+                        </li>
+                    
+             
+            </ul>
+		</nav>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post-2017-08-03-DCGAN-paper-reading" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    <section class='meta'>
+        <h1 class="title">
+            
+                [GAN] DCGAN 논문 이해하기
+            
+        </h1>
+        <time>
+            2017-08-03&nbsp;&nbsp;
+            <i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/blog/">blog</a>
+    </div>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <p><span style="color:#7C7877; font-family: 'Apple SD Gothic Neo'; font-weight:200"></span></p>
+<h2 id="요약"><a href="#요약" class="headerlink" title="요약"></a>요약</h2><p>지금까지 가장 기본적인 GAN의 이론적 내용과 그 코드의 작동 방법에 대해 살펴보았다면, 이제는 GAN을 활용한 다양한 논문들로 그 이론을 확장하고자 한다. 셀 수도 없을 만큼 다양한 GAN 응용 논문들이 있지만, 가장 기본적인 응용 GAN 논문으로 시작한다. 바로 2016년 발표된 <strong>Deep Convolutional Generative Adversarial Nets (DCGAN)</strong> 이다.</p>
+<blockquote>
+<p>논문 pdf :<br><a href="https://arxiv.org/abs/1511.06434" target="_blank" rel="noopener">Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks - Alec Radford el ec, 2016</a></p>
+</blockquote>
+<p><strong>목차</strong></p>
+<ul>
+<li><a href="#gan-review">GAN Review</a></li>
+<li><a href="#기존-gan의-한계">기존 GAN의 한계</a></li>
+<li><a href="#dcgan의-목표">DCGAN의 목표</a></li>
+<li><a href="#architecture-guidelines">Architecture Guidelines</a></li>
+<li><a href="#generator-model">Generator Model</a></li>
+<li><a href="#visualization">Visualization</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+<hr>
+<h2 id="GAN-Review"><a href="#GAN-Review" class="headerlink" title="GAN Review"></a>GAN Review</h2><p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/gan-workflow.jpg" alt="gan-workflow"></p>
+<blockquote>
+<p><a href="https://angrypark.github.io/First-GAN/">[GAN] First GAN</a><br><a href="https://angrypark.github.io/GAN-tutorial-1/">[GAN] 1D Gaussian Distribution Generation</a></p>
+</blockquote>
+<hr>
+<h2 id="기존-GAN의-한계"><a href="#기존-GAN의-한계" class="headerlink" title="기존 GAN의 한계"></a>기존 GAN의 한계</h2><p>기존 GAN의 한계는 다음과 같다.</p>
+<h4 id="1-GAN은-결과가-불안정하다"><a href="#1-GAN은-결과가-불안정하다" class="headerlink" title="1. GAN은 결과가 불안정하다"></a>1. GAN은 결과가 불안정하다</h4><p>기존 GAN만 가지고는 좋은 성능이 잘 안나왔다.</p>
+<h4 id="2-Black-box-method"><a href="#2-Black-box-method" class="headerlink" title="2. Black-box method"></a>2. Black-box method</h4><p>Neural Network 자체의 한계라고 볼 수 있는데, 결정 변수나 주요 변수를 알 수 있는 다수의 머신러닝 기법들과 달리 Neural Network은 처음부터 끝까지 어떤 형태로 그러한 결과가 나오게 되었는지 그 과정을 알 수 없다.</p>
+<h4 id="3-Generative-Model-평가"><a href="#3-Generative-Model-평가" class="headerlink" title="3. Generative Model 평가"></a>3. Generative Model 평가</h4><p>GAN은 결과물 자체가 <strong>새롭게 만들어진 Sample</strong> 이다. 이를 기존 sample과 비교하여 얼마나 비슷한 지 확인할 수 있는 정량적 척도가 없고, 사람이 판단하더라도 이는 주관적 기준이기 때문에 얼마나 정확한지, 혹은 뛰어난지 판단하기 힘들다.</p>
+<hr>
+<h2 id="DCGAN의-목표"><a href="#DCGAN의-목표" class="headerlink" title="DCGAN의 목표"></a>DCGAN의 목표</h2><blockquote>
+<p><strong>1. Generator가 단순 기억으로 generate하지 않는다는 것을 보여줘야 한다.</strong><br><strong>2. z의 미세한 변동에 따른 generate결과가 연속적으로 부드럽게 이루어져야 한다(이를 walking in the latent space라고 한다).</strong></p>
+</blockquote>
+<hr>
+<h2 id="Architecture-Guidelines"><a href="#Architecture-Guidelines" class="headerlink" title="Architecture Guidelines"></a>Architecture Guidelines</h2><p>GAN과 DCGAN의 전체적인 구조는 거의 유사하다. 다만 각각의 Discriminator와 Generator의 세부적인 구조가 달라진다. 논문에서는 이 구조를 개발한 방법을 다음과 같이 소개한다.</p>
+<blockquote>
+<p><em>After extensive model exploration we identified a family of architectures that resulted stable training across a range of datasets and allowed for training higher resolution and deeper generative models.</em></p>
+</blockquote>
+<p>쉽게 말하면 엄청난 노가다(?) 끝에 안정적이고 더 성능이 향상된 결과를 찾게 되었다는 말이다.</p>
+<h4 id="기존-GAN-Architecture"><a href="#기존-GAN-Architecture" class="headerlink" title="기존 GAN Architecture"></a>기존 GAN Architecture</h4><p>기존 GAN은 자세히 살펴보면 다음과 같은 아주 간단하게 fully-connected로 연결되어 있다. <img src="/assets/images/2017-08-03-DCGAN-paper-reading/gan-architecture.png" alt="gan-architecture"></p>
+<h4 id="CNN-Architecture"><a href="#CNN-Architecture" class="headerlink" title="CNN Architecture"></a>CNN Architecture</h4><p>CNN은 이러한 fully-connected 구조 대신에 convolution, pooling, padding을 활용하여 레이어를 구성한다.</p>
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/cnn-architecture.png" alt="cnn-architecture"></p>
+<h4 id="DCGAN-Architecture"><a href="#DCGAN-Architecture" class="headerlink" title="DCGAN Architecture"></a>DCGAN Architecture</h4><p>DCGAN은 결국, 기존 GAN에 존재했던 fully-connected구조의 대부분을 CNN 구조로 대체한 것인데, 앞서 언급했던 것처럼 엄청난 시도들 끝에 다음과 같이 구조를 결정하게 되었다.</p>
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/architecture-guidelines.png" alt="architecture-guidelines"></p>
+<ul>
+<li><p>Discriminator에서는 모든 pooling layers를 <strong>strided convolutions</strong> 로 바꾸고, Generator에서는 pooling layers를 <strong>fractional-strided convolutions</strong> 으로 바꾼다.</p>
+</li>
+<li><p>Generator와 Discriminator에 batch-normalization을 사용한다. 논문에서는 이를 통해 deep generators의 초기 실패를 막는다고 하였다. 그러나 모든 layer에 다 적용하면 sample oscillation과 model instability의 문제가 발생하여 Generator output layer와 Discriminator input layer에는 적용하지 않았다고 한다.</p>
+</li>
+<li><p>Fully-connected hidden layers를 삭제한다.</p>
+</li>
+<li><p>Generator에서 모든 활성화 함수를 Relu를 쓰되, 마지막 결과에서만 Tanh를 사용한다.</p>
+</li>
+<li><p>Discriminator에서는 모든 활성화 함수를 LeakyRelu를 쓴다.</p>
+</li>
+</ul>
+<hr>
+<p><strong>- Strided convolutions?</strong><br><img src="/assets/images/2017-08-03-DCGAN-paper-reading/padding_strides.gif" alt="padding-strides"></p>
+<hr>
+<p><strong>- Fractionally-strided convolutions?</strong><br><img src="/assets/images/2017-08-03-DCGAN-paper-reading/padding_strides_transposed.gif" alt="padding-strides-transposed"><br>논문을 읽으며 가장 이해가 안되었던 부분인데, 기존의 convolutions는 필터를 거치며 크기가 작아진 반면에, fractionally-strided convolutions은 input에 padding을 하고 convolution을 하면서 오히려 크기가 더 커지는 특징이 있다. 쉽게 transposed convolution이라고도 불리고, deconvolution이라고도 불리는데, deconvolution는 잘못된 단어라고 한다.</p>
+<hr>
+<p><strong>- Batch-normalization?</strong><br>Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 이 논문 (<a href="http://arxiv.org/abs/1502.03167" target="_blank" rel="noopener">Batch Normalization : Accelerating Deep Network Training by Reducing Internal Covariance Shift</a>) 에 설명되어 있는 기법으로, 발표된 후 최근에는 거의 모든 인공신경망에 쓰이고 있는 기법이다. 기본적으로 Gradient Vanishing / Gradient Exploding 이 일어나지 않도록 하는 아이디어 중의 하나이며, 지금까지는 이 문제를 Activation 함수의 변화 (ReLU 등), Careful Initialization, small learning rate 등으로 해결하였지만, 이 논문에서는 이러한 간접적인 방법보다 training 하는 과정 자체를 전체적으로 안정화하여 학습 속도를 가속시킬 수 있는 근본적인 방법을 제안하였다.<br>더 자세한 내용은 다음 포스트를 참고하길 바란다.<br><a href="https://shuuki4.wordpress.com/2016/01/13/batch-normalization-%EC%84%A4%EB%AA%85-%EB%B0%8F-%EA%B5%AC%ED%98%84/" target="_blank" rel="noopener">Batch Normalization 설명 및 구현</a></p>
+<hr>
+<h2 id="Generator-Model"><a href="#Generator-Model" class="headerlink" title="Generator Model"></a>Generator Model</h2><p>위에서 설명된 Generator의 구조를 시각화하면 다음과 같다.</p>
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/generator-model.png" alt="generator-model"></p>
+<p>100 dimensional uniform distribution(Z)이 들어오면 이들이 4개의 fractionally-strided convolution layer을 거치며 크기를 키워서 더 높은 차원의 64x64 pixel 이미지가 된다.</p>
+<hr>
+<h2 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h2><h4 id="Generated-bedrooms"><a href="#Generated-bedrooms" class="headerlink" title="Generated bedrooms"></a>Generated bedrooms</h4><p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/visualization-1.png" alt="Visualization"></p>
+<hr>
+<h4 id="Walking-in-the-latent-space"><a href="#Walking-in-the-latent-space" class="headerlink" title="Walking in the latent space"></a>Walking in the latent space</h4><p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/visualization-2.png" alt="Visualization"></p>
+<p>앞서 DCGAN의 목표들 중 하나인 walking in the latent space를 직접 구현한 그림이다.</p>
+<hr>
+<h4 id="Visualize-filters-no-longer-black-box"><a href="#Visualize-filters-no-longer-black-box" class="headerlink" title="Visualize filters (no longer black-box)"></a>Visualize filters (no longer black-box)</h4><p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/visualization-3.png" alt="Visualization"></p>
+<hr>
+<h4 id="Applying-arithmetic-in-the-input-space"><a href="#Applying-arithmetic-in-the-input-space" class="headerlink" title="Applying arithmetic in the input space"></a>Applying arithmetic in the input space</h4><p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/visualization-4.png" alt="Visualization"></p>
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://arxiv.org/abs/1511.06434" target="_blank" rel="noopener">Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks - Alec Radford el ec, 2016</a></p>
+<p><a href="http://jaejunyoo.blogspot.com/2017/02/deep-convolutional-gan-dcgan-1.html" target="_blank" rel="noopener">초짜 대학원생의 입장에서 이해하는 Deep Convolutional Generative Adversarial Network (DCGAN) (1)</a></p>
+<p><a href="http://jaejunyoo.blogspot.com/2017/02/deep-convolutional-gan-dcgan-2.html" target="_blank" rel="noopener">초짜 대학원생의 입장에서 이해하는 Deep Convolutional Generative Adversarial Network (DCGAN) (2)</a></p>
+<p><a href="https://www.youtube.com/watch?v=soJ-wDOSCf4&amp;t=890s" target="_blank" rel="noopener">김태훈: 지적 대화를 위한 깊고 넓은 딥러닝 (Feat. TensorFlow) - PyCon APAC 2016</a></p>
+<p><a href="https://shuuki4.wordpress.com/2016/01/13/batch-normalization-%EC%84%A4%EB%AA%85-%EB%B0%8F-%EA%B5%AC%ED%98%84/" target="_blank" rel="noopener">Batch Normalization 설명 및 구현</a></p>
+<hr>
+
+        </div>
+
+        
+            <div class="article-tags tags">
+                
+                    <a href="/tags/deep-learning/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;deep learning</a>
+                
+                    <a href="/tags/pytorch/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;pytorch</a>
+                
+                    <a href="/tags/gan/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;gan</a>
+                
+                    <a href="/tags/ybigta/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;ybigta</a>
+                
+                    <a href="/tags/dcgan/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;dcgan</a>
+                
+            </div>
+        
+
+        
+            <div class="prev-next">
+                
+                    <section class="prev" >
+                        <span class="art-item-left">
+                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2017/09/2017-09-09-DiscoGAN-paper-reading/" rel="prev" title="[GAN] DiscoGAN 논문 이해하기">
+                                  
+                                      [GAN] DiscoGAN 논문 이해하기
+                                  
+                                </a>
+                            </h4>
+                            
+                                <h6 class="tags">
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>deep learning
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>pytorch
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>gan
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>ybigta
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>disco-gan
+                                    
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2017/08/2017-09-30-Fast-Neural-Transfer/" rel="prev" title="[CNN] 쉽게 따라하는 Fast Neural Transfer with Pytorch">
+                                    
+                                        [CNN] 쉽게 따라하는 Fast Neural Transfer with Pytorch
+                                    
+                                </a>
+                            </h4>
+                            
+                                <h6 class="tags">
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>deep learning
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>neural transfer
+                                    
+                                        <i class="fa fa-tag fa-fw"></i>pytorch
+                                    
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+                
+
+    <div class="recommended_posts">
+        <h4><i class="fa fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;你可能感兴趣的文章</h4>
+        <ul>
+            
+                <li><a href="https://angrypark.github.io/2017/11/2017-11-18-GAN-tutorial-2/">[GAN] 1D Gaussian Distribution Generation</a></li>
+            
+                <li><a href="https://angrypark.github.io/2017/09/2017-09-09-DiscoGAN-paper-reading/">[GAN] DiscoGAN 논문 이해하기</a></li>
+            
+                <li><a href="https://angrypark.github.io/2017/08/2017-09-30-Fast-Neural-Transfer/">[CNN] 쉽게 따라하는 Fast Neural Transfer with Pytorch</a></li>
+            
+                <li><a href="https://angrypark.github.io/2017/08/2017-08-01-Movie-Recommendation/">[Kaggle] Movie Recommendation</a></li>
+            
+                <li><a href="https://angrypark.github.io/2017/07/2017-07-27-Embed-Plotly/">[Visualization] Markdown에 plotly 그래프 넣기</a></li>
+            
+        </ul>
+    </div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+
+            
+
+            
+
+                
+
+                
+
+                
+            
+
+        </section>
+    </article>
+
+
+<script>
+    window.subData = {
+        title: '[GAN] DCGAN 논문 이해하기',
+        tools: true
+    }
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+    
+        
+    <section class='m_widget author'>
+        
+        <div class='content'>
+            
+                <h2>Contact</h2>
+            
+            
+        </div>
+        
+            <div class="social-wrapper">
+              
+                
+                    <a href="mailto:sungnam1108@naver.com" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-envelope" aria-hidden="true"></i></a>
+                
+              
+                
+                    <a href="https://github.com/angrypark" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-github" aria-hidden="true"></i></a>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                    <a href="https://www.linkedin.com/in/angrypark/" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-linkedin" aria-hidden="true"></i></a>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                    <a href="https://www.facebook.com/sungnam1108" class="social flat-box" target="_blank" rel="external"><i class="social fa fa-facebook" aria-hidden="true"></i></a>
+                
+              
+            </div>
+        
+    </section>
+
+
+    
+    
+        <section class='m_widget categories'>
+    <div class='header'><i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+    <div class='content'>
+        
+            <ul class="entry">
+                
+                    <li><a class="flat-box" href="/categories/blog/"><div class='name'>blog</div><div class='badge'>11</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/project/"><div class='name'>project</div><div class='badge'>4</div></a></li>
+                
+            </ul>
+        
+    </div>
+</section>
+
+    
+    
+        
+    <section class='m_widget tagcloud'>
+        <div class="header"><i class="fa fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Tags</div>
+        <div class='content'>
+            <a href="/tags/Computer-Vision/" style="font-size: 14px; color: #999">Computer Vision</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 14px; color: #999">Convolutional Neural Networks</a> <a href="/tags/Deep-Learning/" style="font-size: 14px; color: #999">Deep Learning</a> <a href="/tags/HR/" style="font-size: 14px; color: #999">HR</a> <a href="/tags/ISL/" style="font-size: 18px; color: #7e7e7e">ISL</a> <a href="/tags/Kaggle/" style="font-size: 14px; color: #999">Kaggle</a> <a href="/tags/Tag1/" style="font-size: 14px; color: #999">Tag1</a> <a href="/tags/Tag2/" style="font-size: 14px; color: #999">Tag2</a> <a href="/tags/Tag3/" style="font-size: 14px; color: #999">Tag3</a> <a href="/tags/blog/" style="font-size: 16px; color: #8b8b8b">blog</a> <a href="/tags/comment-analysis/" style="font-size: 14px; color: #999">comment analysis</a> <a href="/tags/data-analysis/" style="font-size: 14px; color: #999">data analysis</a> <a href="/tags/data-science/" style="font-size: 14px; color: #999">data science</a> <a href="/tags/dcgan/" style="font-size: 14px; color: #999">dcgan</a> <a href="/tags/deep-learning/" style="font-size: 24px; color: #555">deep learning</a> <a href="/tags/disco-gan/" style="font-size: 14px; color: #999">disco-gan</a> <a href="/tags/emotion-detection/" style="font-size: 14px; color: #999">emotion detection</a> <a href="/tags/gan/" style="font-size: 22px; color: #636363">gan</a> <a href="/tags/github/" style="font-size: 14px; color: #999">github</a> <a href="/tags/interactive-graph/" style="font-size: 14px; color: #999">interactive graph</a> <a href="/tags/jekyll/" style="font-size: 14px; color: #999">jekyll</a> <a href="/tags/kaggle/" style="font-size: 14px; color: #999">kaggle</a> <a href="/tags/machine-learning/" style="font-size: 20px; color: #707070">machine learning</a> <a href="/tags/neural-transfer/" style="font-size: 14px; color: #999">neural transfer</a> <a href="/tags/plotly/" style="font-size: 14px; color: #999">plotly</a> <a href="/tags/pytorch/" style="font-size: 22px; color: #636363">pytorch</a> <a href="/tags/recommendation/" style="font-size: 14px; color: #999">recommendation</a> <a href="/tags/statistical-learning/" style="font-size: 18px; color: #7e7e7e">statistical learning</a> <a href="/tags/text-mining/" style="font-size: 14px; color: #999">text mining</a> <a href="/tags/tripadvisor/" style="font-size: 14px; color: #999">tripadvisor</a> <a href="/tags/ybigta/" style="font-size: 22px; color: #636363">ybigta</a>
+        </div>
+    </section>
+
+
+    
+    
+    
+    
+        
+    <section class='m_widget toc-wrapper'>
+        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;목차</div>
+        <div class='content'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#요약"><span class="toc-text">요약</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GAN-Review"><span class="toc-text">GAN Review</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#기존-GAN의-한계"><span class="toc-text">기존 GAN의 한계</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-GAN은-결과가-불안정하다"><span class="toc-text">1. GAN은 결과가 불안정하다</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Black-box-method"><span class="toc-text">2. Black-box method</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Generative-Model-평가"><span class="toc-text">3. Generative Model 평가</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DCGAN의-목표"><span class="toc-text">DCGAN의 목표</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture-Guidelines"><span class="toc-text">Architecture Guidelines</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#기존-GAN-Architecture"><span class="toc-text">기존 GAN Architecture</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CNN-Architecture"><span class="toc-text">CNN Architecture</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DCGAN-Architecture"><span class="toc-text">DCGAN Architecture</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Generator-Model"><span class="toc-text">Generator Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Visualization"><span class="toc-text">Visualization</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Generated-bedrooms"><span class="toc-text">Generated bedrooms</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Walking-in-the-latent-space"><span class="toc-text">Walking in the latent space</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Visualize-filters-no-longer-black-box"><span class="toc-text">Visualize filters (no longer black-box)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Applying-arithmetic-in-the-input-space"><span class="toc-text">Applying arithmetic in the input space</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        </div>
+    </section>
+
+
+    
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    </div>
+    <footer id="footer" class="clearfix">
+    
+        <div class="social-wrapper">
+          
+              
+                  <a href="mailto:sungnam1108@naver.com" class="social fa fa-envelope flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+                  <a href="https://github.com/angrypark" class="social fa fa-github flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+                  <a href="https://www.linkedin.com/in/angrypark/" class="social fa fa-linkedin flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+          
+              
+                  <a href="https://www.facebook.com/sungnam1108" class="social fa fa-facebook flat-box" target="_blank" rel="external"></a>
+              
+          
+        </div>
+    
+    <br>
+    <div>博客内容遵循 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="licenses">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></div>
+    <div>本站使用 <a href="https://github.com/xaoxuu/hexo-theme-material-x" target="_blank" class="codename">Material X</a> 作为主题，
+		总访问量为 <span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+    </div>
+</footer>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='//cdn.bootcss.com/node-waves/0.7.5/waves.min.js'></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+<!-- 访问统计 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script src="/js/jquery.fitvids.js"></script>
+
+    <script>
+        var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+        var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+        var ALGOLIA_API_KEY = "";
+        var ALGOLIA_APP_ID = "";
+        var ALGOLIA_INDEX_NAME = "";
+        var AZURE_SERVICE_NAME = "";
+        var AZURE_INDEX_NAME = "";
+        var AZURE_QUERY_KEY = "";
+        var BAIDU_API_ID = "";
+        var SEARCH_SERVICE = "hexo" || "hexo";
+        var ROOT = "/"||"/";
+        if(!ROOT.endsWith('/'))ROOT += '/';
+    </script>
+
+<script src="/js/search.js"></script>
+<script src="/js/app.js"></script>
+
+
+    
+    
+    
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>
