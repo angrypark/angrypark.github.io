@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>angrypark&#39;s blog</title>
+  <title>angrypark</title>
   
   <subtitle>머신러닝을 공부하는 박성남입니다</subtitle>
-  <link href="/blog/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
-  <link href="https://angrypark.github.io/blog/"/>
+  <link href="https://angrypark.github.io/"/>
   <updated>2018-09-19T11:46:24.861Z</updated>
-  <id>https://angrypark.github.io/blog/</id>
+  <id>https://angrypark.github.io/</id>
   
   <author>
     <name>angrypark</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>d</title>
-    <link href="https://angrypark.github.io/blog/2018/09/19/d/"/>
-    <id>https://angrypark.github.io/blog/2018/09/19/d/</id>
+    <link href="https://angrypark.github.io/2018/09/d/"/>
+    <id>https://angrypark.github.io/2018/09/d/</id>
     <published>2018-09-19T11:39:48.000Z</published>
     <updated>2018-09-19T11:46:24.861Z</updated>
     
@@ -40,8 +40,8 @@
   
   <entry>
     <title>c</title>
-    <link href="https://angrypark.github.io/blog/2018/09/19/c/"/>
-    <id>https://angrypark.github.io/blog/2018/09/19/c/</id>
+    <link href="https://angrypark.github.io/2018/09/c/"/>
+    <id>https://angrypark.github.io/2018/09/c/</id>
     <published>2018-09-19T11:26:14.000Z</published>
     <updated>2018-09-19T11:28:34.167Z</updated>
     
@@ -50,14 +50,14 @@
     </summary>
     
     
-      <category term="Tag3" scheme="https://angrypark.github.io/blog/tags/Tag3/"/>
+      <category term="Tag3" scheme="https://angrypark.github.io/tags/Tag3/"/>
     
   </entry>
   
   <entry>
     <title>b</title>
-    <link href="https://angrypark.github.io/blog/2018/09/19/b/"/>
-    <id>https://angrypark.github.io/blog/2018/09/19/b/</id>
+    <link href="https://angrypark.github.io/2018/09/b/"/>
+    <id>https://angrypark.github.io/2018/09/b/</id>
     <published>2018-09-19T09:22:17.000Z</published>
     <updated>2018-09-19T11:28:28.276Z</updated>
     
@@ -66,16 +66,16 @@
     </summary>
     
     
-      <category term="Tag1" scheme="https://angrypark.github.io/blog/tags/Tag1/"/>
+      <category term="Tag1" scheme="https://angrypark.github.io/tags/Tag1/"/>
     
-      <category term="Tag2" scheme="https://angrypark.github.io/blog/tags/Tag2/"/>
+      <category term="Tag2" scheme="https://angrypark.github.io/tags/Tag2/"/>
     
   </entry>
   
   <entry>
     <title>A&#39;s Title</title>
-    <link href="https://angrypark.github.io/blog/2018/09/19/a/"/>
-    <id>https://angrypark.github.io/blog/2018/09/19/a/</id>
+    <link href="https://angrypark.github.io/2018/09/a/"/>
+    <id>https://angrypark.github.io/2018/09/a/</id>
     <published>2018-09-19T09:18:20.000Z</published>
     <updated>2018-09-19T12:03:25.032Z</updated>
     
@@ -90,25 +90,25 @@
     
     </summary>
     
-      <category term="Cat2" scheme="https://angrypark.github.io/blog/categories/Cat2/"/>
+      <category term="post" scheme="https://angrypark.github.io/categories/post/"/>
     
-      <category term="Cat3" scheme="https://angrypark.github.io/blog/categories/Cat3/"/>
+      <category term="Cat2" scheme="https://angrypark.github.io/categories/Cat2/"/>
     
-      <category term="post" scheme="https://angrypark.github.io/blog/categories/post/"/>
+      <category term="Cat3" scheme="https://angrypark.github.io/categories/Cat3/"/>
     
     
-      <category term="Tag1" scheme="https://angrypark.github.io/blog/tags/Tag1/"/>
+      <category term="Tag1" scheme="https://angrypark.github.io/tags/Tag1/"/>
     
-      <category term="Tag2" scheme="https://angrypark.github.io/blog/tags/Tag2/"/>
+      <category term="Tag2" scheme="https://angrypark.github.io/tags/Tag2/"/>
     
-      <category term="Tag3" scheme="https://angrypark.github.io/blog/tags/Tag3/"/>
+      <category term="Tag3" scheme="https://angrypark.github.io/tags/Tag3/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://angrypark.github.io/blog/2018/09/19/hello-world/"/>
-    <id>https://angrypark.github.io/blog/2018/09/19/hello-world/</id>
+    <link href="https://angrypark.github.io/2018/09/hello-world/"/>
+    <id>https://angrypark.github.io/2018/09/hello-world/</id>
     <published>2018-09-19T09:06:48.224Z</published>
     <updated>2018-09-19T09:06:48.224Z</updated>
     
