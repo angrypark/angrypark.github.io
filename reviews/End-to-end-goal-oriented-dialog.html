@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>End-to-end-goal-oriented-dialog</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/sungnampark/.atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+
+      
+      
+
+      <style> 
+      /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+abap+actionscript+ada+apacheconf+apl+applescript+asciidoc+aspnet+autoit+autohotkey+bash+basic+batch+c+brainfuck+bro+bison+csharp+cpp+coffeescript+ruby+css-extras+d+dart+django+diff+docker+eiffel+elixir+erlang+fsharp+fortran+gherkin+git+glsl+go+graphql+groovy+haml+handlebars+haskell+haxe+http+icon+inform7+ini+j+jade+java+jolie+json+julia+keyman+kotlin+latex+less+livescript+lolcode+lua+makefile+markdown+matlab+mel+mizar+monkey+nasm+nginx+nim+nix+nsis+objectivec+ocaml+oz+parigp+parser+pascal+perl+php+php-extras+powershell+processing+prolog+properties+protobuf+puppet+pure+python+q+qore+r+jsx+reason+rest+rip+roboconf+crystal+rust+sas+sass+scss+scala+scheme+smalltalk+smarty+sql+stylus+swift+tcl+textile+twig+typescript+vbnet+verilog+vhdl+vim+wiki+xojo+yaml */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;padding:2em;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#0050a3;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:16px;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:normal}}@media screen and (min-width:914px){html body:not([data-presentation-mode]){width:980px;margin:10px auto}}@media screen and (max-width:400px){html body:not([data-presentation-mode]){font-size:14px;margin:0 auto;padding:15px}}html body .pagebreak,html body .newpage{page-break-before:always}html body pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}html body pre.line-numbers>code{position:relative}html body pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}html body pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}html body pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}html body .mathjax-exps .MathJax_Display{text-align:center !important}html body:not([for="preview"]) .code-chunk .btn-group{display:none}html body:not([for="preview"]) .code-chunk .status{display:none} 
+       
+      </style>
+    </head>
+    <body class="mume   ">
+    <h1 class="mume-header" id="learning-end-to-end-goal-oriented-dialog">Learning end-to-end goal oriented dialog</h1>
+
+<p>18-03-10 박성남</p>
+<hr>
+<p>기존에 사용되었던 goal-oriented dialog system(명확한 task, 목표가 있는 dialog구축)은 해당 domain에 대한 많은 수작업이 필요했고, 이를 바로 다른 분야로 확장하기는 매우 힘듭니다. 수작업이 필요했던 문제를 해결한 것이 end-to-end dialog system입니다. 학습에 필요한 모든 것을 수작업 없이 dialog에서 직접 구했기 때문에 따로 handcrafting이 필요없었던 것이죠. 하지만 이 end-to-end dialog system은 open domain에 관련된 것이기 때문에 여기서 얻은 학문적 성과를 goal-oriented에 연결시키기엔 매우 어려웠습니다.(제가 이해하기로는 goal-oriented는 intent와 action이 필요해서인 것 같네요.) 이 논문에서는 앞으로 이 분야가 발전되기 위해서 goal-oriented tasks에서의 end-to-end dialog system을 적용했을 때의 장점과 단점을 분석하기 위한 시험 환경(a.k.a. test set)을 제안합니다.</p>
+<p>제가 인턴을 하고 있는 분야는 여기서 non-goal-oriented(혹은 open domain) dialog system인데, 그 분야를 공부하기 시작한 입장에서 굉장히 재밌게 봤습니다.</p>
+<h2 class="mume-header" id="1-introduction">1. Introduction</h2>
+
+<ul>
+<li>최근 dialog system이 유용하게 쓰이는 분야는 goal-oriented입니다.</li>
+<li>지금까지는 <strong>slot-filling</strong> 방식이 주를 이뤘습니다.
+<ul>
+<li>구조를 미리 정의내리고 dialog의 상태를 slot으로 표현</li>
+<li>레스토랑 예약의 경우 slot은 location, price range, type of cuisine 등</li>
+<li>이 방식은 다른 domain으로 확장하기 불가능</li>
+</ul>
+</li>
+<li>end-to-end는 다른 것(가정,domain,문장의 구조,slot) 필요없이 dialog 자체에서 학습
+<ul>
+<li>이 분야는 chit-chat에서 좋은 결과를 보여줌</li>
+<li>다른 domain으로의 확장이 매우 쉬움</li>
+</ul>
+</li>
+<li>이 논문은 end-to-end dialog system을 goal-oriented에 적용시켰을 때 얼마나 좋은 성능을 보일지 측정하기 위한 시험 환경을 제시합니다.</li>
+</ul>
+<p><img src="images/1.PNG" alt=""></p>
+<h2 class="mume-header" id="3-goal-oriented-dialog-tasks">3. Goal-oriented dialog tasks</h2>
+
+<p>여기서 제공하는 시험 환경에 대한 설명입니다. 딱히 이 분야를 풀고싶은 이유가 있는 것이 아니라, 기존의 goal-oriented 문제를 풀었던 모델들이 좋은 성능을 보여주었던 domain이기 때문입니다. 자세한 data에 대한 정보는 아래 표를 참고하세요.<br>
+<img src="images/2.png" alt=""></p>
+<ol>
+<li>
+<p>레스토랑 예약 시뮬레이션</p>
+<p>이걸 뭐 이렇게까지 설명할 이유가 있나 싶기는 하지만... 이론적으로 배우는 느낌보다는 시험 환경에 대한 디테일 제시입니다.</p>
+<ul>
+<li>주요 과제 정의
+<ul>
+<li>Task 1. Issuing API calls : 들어온 요청에 따라 0~4로 분류되어있는 분야 중 한 곳의 api를 부릅니다.</li>
+<li>Task 2. Updating API calls : 요청을 update해서 다른 api를 부르거나 api의 세부사항을 바꾸거나 요청을 끝냅니다.</li>
+<li>Task 3. Displaying options : 선택할 수 있는 옵션 표시</li>
+<li>Task 4. Providing extra information : 추가 정보 제공</li>
+<li>Task 5. Conducting full dialogs : T1~T4를 합쳐서 Full dialog로 만듬</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Dialog state tracking challenge</p>
+<p>사람과 bot의 대화 내용을 추가했습니다. DSTC2 data를 사용했다고 하네요. Domain은 마찬가지로 레스토랑 예약입니다. user와 bot의 대화 + 그리고 각각에 사용됬던 API calls와 추가로 나누었던 대화가 포함되어 있습니다. 이를 Task 6로 표현했습니다.</p>
+</li>
+<li>
+<p>Online concierge service<br>
+위의 표에 제시된 Task 1~5는 모두 같은 Knowledge Base(레스토랑 예약)와 관련된 과제들이고, Task 6은 Dialog state tracking challenge에서 제시된 과제입니다.<br>
+그런데 이 과제들은 더 현실적인 분야에서 잘 작동하냐는 보장이 없습니다. 따라서, Real online concierge service에서의 레스토랑 예약 대화 내용의 데이터를 추가했습니다. 모두 사람 간의 대화 내용을 script한 내용입니다.</p>
+</li>
+</ol>
+<h3 class="mume-header" id="4-models">4. Models</h3>
+
+<p>자 느낌을 알아야합니다. <strong>여기선 새로운 모델을 제시하지 않습니다.</strong> 그냥, 기존 모델들이 이 testbed(시험 환경)에서 어떤 점수를 기록하는지 확인합니다.</p>
+<blockquote>
+<p><strong>Q. Accuracy 계산?</strong><br>
+<img src="images/4.png" alt=""></p>
+</blockquote>
+<p><img src="images/3.PNG" alt=""></p>
+<ul>
+<li>Rule-based systems
+<ul>
+<li>T1~T5 자체가 simulator로 만들어진 것이기 때문에, rule-based를 통해서라면 100% 예측가능해집니다.</li>
+<li>T6는 사람-봇 간의 dialog를 집어넣었기 때문에 잘 못맞춤</li>
+</ul>
+</li>
+<li>TF-IDF match
+<ul>
+<li>모든 가능한 후보 response간의 TF-IDF weighted cosine similarity score로 선택</li>
+<li>다 안좋음</li>
+</ul>
+</li>
+<li>Nearest neighbor
+<ul>
+<li>training set에서의 가장 유사한 phrase를 가져옴</li>
+<li>모든 input이 마지막 질문이라고 가정</li>
+<li>모든 대화를 단일의 짝으로 구성(연결 안됨)</li>
+</ul>
+</li>
+<li>Supervised embeddings
+<ul>
+<li>pretrained된 word2vec 모델을 가져와서 사용</li>
+</ul>
+</li>
+<li>Memory networks
+<ul>
+<li>MemN2N</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="6-conclusions">6. Conclusions</h3>
+
+<p>이 논문은 앞으로의 시험 환경을 제시하기 위해 데이터셋을 공개했습니다. 그 이유는 다음과 같습니다.</p>
+<ul>
+<li>현존하는 성능 채점은 재생산성이나 실제 사람의 의사결정을 반영하지 않습니다.</li>
+<li>과제의 통일성은, 연구자들로 하여금 learning methods에 더 집중하게 해줄껍니다.</li>
+<li>[End-to-end] + [goal-oriented]는 연구할만한 가치가 있습니다. (실제 상황에 유용합니다.)</li>
+</ul>
+<p>근데, 음... 가볍게 읽기 좋았습니다ㅎㅎㅎ 모델 이론이 없어서 ㅋㅋㅋ 개꿀~!!!</p>
+
+    </body>
+    
+    <script>
+(function bindTaskListEvent() {
+  var taskListItemCheckboxes = document.body.getElementsByClassName('task-list-item-checkbox')
+  for (var i = 0; i < taskListItemCheckboxes.length; i++) {
+    var checkbox = taskListItemCheckboxes[i]
+    var li = checkbox.parentElement
+    if (li.tagName !== 'LI') li = li.parentElement
+    if (li.tagName === 'LI') {
+      li.classList.add('task-list-item')
+    }
+  }
+}())    
+</script>
+  </html>
