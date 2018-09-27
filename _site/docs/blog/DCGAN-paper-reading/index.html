@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.1.1
+    Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    <title>[GAN] DCGAN 논문 이해하기</title>
+    <meta name="description" content="">
+    <link rel="canonical" href="http://localhost:4000/docs/blog/DCGAN-paper-reading/">
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  gan-dcgan-논문-이해하기">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/about/">About me</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="angrypark">
+        <img src="/images/profile-icon.jpg" class="site-logo-img animated fadeInDown" alt="angrypark">
+      </a>
+    
+    
+      <h1 class="site-title animated fadeIn"><a href="/">angrypark</a></h1>
+      <p class="site-description animated fadeIn" itemprop="description">머신러닝을 공부하는 박성남입니다.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+  
+  
+  
+
+  <div class="page-image">
+    <img src="/assets/images/2017-08-03-DCGAN-paper-reading/background.jpg" class="entry-feature-image u-photo" alt="[GAN] DCGAN 논문 이해하기" >
+    
+  </div>
+
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">[GAN] DCGAN 논문 이해하기
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+    <time class="page-date dt-published" datetime="2017-08-03T20:30:00+09:00"><a class="u-url" href="">August 3, 2017</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy">docs</li><li class="page-taxonomy">blog</li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy">gan</li><li class="page-taxonomy">pytorch</li><li class="page-taxonomy">deep learning</li><li class="page-taxonomy">ybigta</li><li class="page-taxonomy">dcgan</li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <p><span style="color:#7C7877; font-family: 'Apple SD Gothic Neo'; font-weight:200"></span></p>
+
+<h2 id="요약">요약</h2>
+
+<p>지금까지 가장 기본적인 GAN의 이론적 내용과 그 코드의 작동 방법에 대해 살펴보았다면, 이제는 GAN을 활용한 다양한 논문들로 그 이론을 확장하고자 한다. 셀 수도 없을 만큼 다양한 GAN 응용 논문들이 있지만, 가장 기본적인 응용 GAN 논문으로 시작한다. 바로 2016년 발표된 <strong>Deep Convolutional Generative Adversarial Nets (DCGAN)</strong> 이다.</p>
+
+<blockquote>
+  <p>논문 pdf :
+<a href="https://arxiv.org/abs/1511.06434">Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks - Alec Radford el ec, 2016</a></p>
+</blockquote>
+
+<p><strong>목차</strong></p>
+
+<ul>
+  <li><a href="#gan-review">GAN Review</a></li>
+  <li><a href="#기존-gan의-한계">기존 GAN의 한계</a></li>
+  <li><a href="#dcgan의-목표">DCGAN의 목표</a></li>
+  <li><a href="#architecture-guidelines">Architecture Guidelines</a></li>
+  <li><a href="#generator-model">Generator Model</a></li>
+  <li><a href="#visualization">Visualization</a></li>
+  <li><a href="#reference">Reference</a></li>
+</ul>
+
+<hr />
+<h2 id="gan-review">GAN Review</h2>
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/gan-workflow.jpg" alt="gan-workflow" /></p>
+
+<blockquote>
+  <p><a href="https://angrypark.github.io/First-GAN/">[GAN] First GAN</a>
+<a href="https://angrypark.github.io/GAN-tutorial-1/">[GAN] 1D Gaussian Distribution Generation</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="기존-gan의-한계">기존 GAN의 한계</h2>
+<p>기존 GAN의 한계는 다음과 같다.</p>
+
+<h4 id="1-gan은-결과가-불안정하다">1. GAN은 결과가 불안정하다</h4>
+<p>기존 GAN만 가지고는 좋은 성능이 잘 안나왔다.</p>
+
+<h4 id="2-black-box-method">2. Black-box method</h4>
+<p>Neural Network 자체의 한계라고 볼 수 있는데, 결정 변수나 주요 변수를 알 수 있는 다수의 머신러닝 기법들과 달리 Neural Network은 처음부터 끝까지 어떤 형태로 그러한 결과가 나오게 되었는지 그 과정을 알 수 없다.</p>
+
+<h4 id="3-generative-model-평가">3. Generative Model 평가</h4>
+<p>GAN은 결과물 자체가 <strong>새롭게 만들어진 Sample</strong> 이다. 이를 기존 sample과 비교하여 얼마나 비슷한 지 확인할 수 있는 정량적 척도가 없고, 사람이 판단하더라도 이는 주관적 기준이기 때문에 얼마나 정확한지, 혹은 뛰어난지 판단하기 힘들다.</p>
+
+<hr />
+<h2 id="dcgan의-목표">DCGAN의 목표</h2>
+<blockquote>
+  <p><strong>1. Generator가 단순 기억으로 generate하지 않는다는 것을 보여줘야 한다.</strong>
+<strong>2. z의 미세한 변동에 따른 generate결과가 연속적으로 부드럽게 이루어져야 한다(이를 walking in the latent space라고 한다).</strong></p>
+</blockquote>
+
+<hr />
+<h2 id="architecture-guidelines">Architecture Guidelines</h2>
+<p>GAN과 DCGAN의 전체적인 구조는 거의 유사하다. 다만 각각의 Discriminator와 Generator의 세부적인 구조가 달라진다. 논문에서는 이 구조를 개발한 방법을 다음과 같이 소개한다.</p>
+<blockquote>
+  <p><em>After extensive model exploration we identified a family of architectures that resulted stable training across a range of datasets and allowed for training higher resolution and deeper generative models.</em></p>
+</blockquote>
+
+<p>쉽게 말하면 엄청난 노가다(?) 끝에 안정적이고 더 성능이 향상된 결과를 찾게 되었다는 말이다.</p>
+
+<h4 id="기존-gan-architecture">기존 GAN Architecture</h4>
+<p>기존 GAN은 자세히 살펴보면 다음과 같은 아주 간단하게 fully-connected로 연결되어 있다. <img src="/assets/images/2017-08-03-DCGAN-paper-reading/gan-architecture.png" alt="gan-architecture" /></p>
+
+<h4 id="cnn-architecture">CNN Architecture</h4>
+<p>CNN은 이러한 fully-connected 구조 대신에 convolution, pooling, padding을 활용하여 레이어를 구성한다.</p>
+
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/cnn-architecture.png" alt="cnn-architecture" /></p>
+
+<h4 id="dcgan-architecture">DCGAN Architecture</h4>
+<p>DCGAN은 결국, 기존 GAN에 존재했던 fully-connected구조의 대부분을 CNN 구조로 대체한 것인데, 앞서 언급했던 것처럼 엄청난 시도들 끝에 다음과 같이 구조를 결정하게 되었다.</p>
+
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/architecture-guidelines.png" alt="architecture-guidelines" /></p>
+
+<ul>
+  <li>
+    <p>Discriminator에서는 모든 pooling layers를 <strong>strided convolutions</strong> 로 바꾸고, Generator에서는 pooling layers를 <strong>fractional-strided convolutions</strong> 으로 바꾼다.</p>
+  </li>
+  <li>
+    <p>Generator와 Discriminator에 batch-normalization을 사용한다. 논문에서는 이를 통해 deep generators의 초기 실패를 막는다고 하였다. 그러나 모든 layer에 다 적용하면 sample oscillation과 model instability의 문제가 발생하여 Generator output layer와 Discriminator input layer에는 적용하지 않았다고 한다.</p>
+  </li>
+  <li>
+    <p>Fully-connected hidden layers를 삭제한다.</p>
+  </li>
+  <li>
+    <p>Generator에서 모든 활성화 함수를 Relu를 쓰되, 마지막 결과에서만 Tanh를 사용한다.</p>
+  </li>
+  <li>
+    <p>Discriminator에서는 모든 활성화 함수를 LeakyRelu를 쓴다.</p>
+  </li>
+</ul>
+
+<hr />
+
+<p><strong>- Strided convolutions?</strong>
+<img src="/assets/images/2017-08-03-DCGAN-paper-reading/padding_strides.gif" alt="padding-strides" /></p>
+
+<hr />
+
+<p><strong>- Fractionally-strided convolutions?</strong>
+<img src="/assets/images/2017-08-03-DCGAN-paper-reading/padding_strides_transposed.gif" alt="padding-strides-transposed" />
+논문을 읽으며 가장 이해가 안되었던 부분인데, 기존의 convolutions는 필터를 거치며 크기가 작아진 반면에, fractionally-strided convolutions은 input에 padding을 하고 convolution을 하면서 오히려 크기가 더 커지는 특징이 있다. 쉽게 transposed convolution이라고도 불리고, deconvolution이라고도 불리는데, deconvolution는 잘못된 단어라고 한다.</p>
+
+<hr />
+
+<p><strong>- Batch-normalization?</strong>
+Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 이 논문 (<a href="http://arxiv.org/abs/1502.03167">Batch Normalization : Accelerating Deep Network Training by Reducing Internal Covariance Shift</a>) 에 설명되어 있는 기법으로, 발표된 후 최근에는 거의 모든 인공신경망에 쓰이고 있는 기법이다. 기본적으로 Gradient Vanishing / Gradient Exploding 이 일어나지 않도록 하는 아이디어 중의 하나이며, 지금까지는 이 문제를 Activation 함수의 변화 (ReLU 등), Careful Initialization, small learning rate 등으로 해결하였지만, 이 논문에서는 이러한 간접적인 방법보다 training 하는 과정 자체를 전체적으로 안정화하여 학습 속도를 가속시킬 수 있는 근본적인 방법을 제안하였다.
+더 자세한 내용은 다음 포스트를 참고하길 바란다.
+<a href="https://shuuki4.wordpress.com/2016/01/13/batch-normalization-%EC%84%A4%EB%AA%85-%EB%B0%8F-%EA%B5%AC%ED%98%84/">Batch Normalization 설명 및 구현</a></p>
+
+<hr />
+<h2 id="generator-model">Generator Model</h2>
+<p>위에서 설명된 Generator의 구조를 시각화하면 다음과 같다.</p>
+
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/generator-model.png" alt="generator-model" /></p>
+
+<p>100 dimensional uniform distribution(Z)이 들어오면 이들이 4개의 fractionally-strided convolution layer을 거치며 크기를 키워서 더 높은 차원의 64x64 pixel 이미지가 된다.</p>
+
+<hr />
+<h2 id="visualization">Visualization</h2>
+<h4 id="generated-bedrooms">Generated bedrooms</h4>
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/visualization-1.png" alt="Visualization" /></p>
+
+<hr />
+
+<h4 id="walking-in-the-latent-space">Walking in the latent space</h4>
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/visualization-2.png" alt="Visualization" /></p>
+
+<p>앞서 DCGAN의 목표들 중 하나인 walking in the latent space를 직접 구현한 그림이다.</p>
+
+<hr />
+
+<h4 id="visualize-filters-no-longer-black-box">Visualize filters (no longer black-box)</h4>
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/visualization-3.png" alt="Visualization" /></p>
+
+<hr />
+
+<h4 id="applying-arithmetic-in-the-input-space">Applying arithmetic in the input space</h4>
+<p><img src="/assets/images/2017-08-03-DCGAN-paper-reading/visualization-4.png" alt="Visualization" /></p>
+
+<hr />
+<h2 id="reference">Reference</h2>
+<p><a href="https://arxiv.org/abs/1511.06434">Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks - Alec Radford el ec, 2016</a></p>
+
+<p><a href="http://jaejunyoo.blogspot.com/2017/02/deep-convolutional-gan-dcgan-1.html">초짜 대학원생의 입장에서 이해하는 Deep Convolutional Generative Adversarial Network (DCGAN) (1)</a></p>
+
+<p><a href="http://jaejunyoo.blogspot.com/2017/02/deep-convolutional-gan-dcgan-2.html">초짜 대학원생의 입장에서 이해하는 Deep Convolutional Generative Adversarial Network (DCGAN) (2)</a></p>
+
+<p><a href="https://www.youtube.com/watch?v=soJ-wDOSCf4&amp;t=890s">김태훈: 지적 대화를 위한 깊고 넓은 딥러닝 (Feat. TensorFlow) - PyCon APAC 2016</a></p>
+
+<p><a href="https://shuuki4.wordpress.com/2016/01/13/batch-normalization-%EC%84%A4%EB%AA%85-%EB%B0%8F-%EA%B5%AC%ED%98%84/">Batch Normalization 설명 및 구현</a></p>
+
+<hr />
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/docs/project/Fast-Neural-Transfer/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> [CNN] 쉽게 따라하는 Fast Neural Transfer with Pytorch
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/docs/blog/DiscoGAN-paper-reading/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        [GAN] DiscoGAN 논문 이해하기
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/angrypark"><i class="fab fa-github-alt fa-2x" title="Github"></i></a><a class="social-icon" href="https://facebook.com/sungnam1108"><i class="fab fa-facebook-square fa-2x" title="Facebook"></i></a><a class="social-icon" href="https://www.linkedin.com/in/angrypark/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a><a class="social-icon" href="mailto:sungnam1108@naver.com"><i class="fa fa-envelope fa-2x" title="Email"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2018 angrypark. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  </body>
+
+</html>

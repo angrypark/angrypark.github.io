@@ -1,101 +1,118 @@
-# main text of home
-name: angrypark
-bio: 머신러닝을 공부하고 있는 박성남입니다.
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-# twitter summary info
-description: angrypark
-
-# if it's an external image, update below for true
-# better with square images
-external-image: true
-picture: assets/images/profile.jpg
-
-# If you want to include your resume, set to true
-# and specify source (external or local).
-resume: false
-resume-external: false
-resume-url: https://google.com/?q=my+resume
-
-url: https://angrypark.github.io
-
-permalink: /:title/
-# To enable google analytics, supply your token below
-# analytics-google: 'UA-MYANALYTICS'
-
-# To enable piwik tracking, supply your url & site ID below
-# analytics-piwik-url: 'piwik.my-host.com'
-# analytics-piwik-id: 1
-
-# if you don't want comments in your posts, leave categories empty
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+theme: jekyll-theme-so-simple
+# remote_theme: mmistakes/so-simple-theme
+locale: en-US
+title: "angrypark"
+description: "머신러닝을 공부하는 박성남입니다."
+baseurl: # the subpath of your site, e.g. "/blog"
+url: https://angrypark.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+logo: /images/profile-icon.jpg # path of site logo, e.g. "/images/logo.png"
+date_format: "%B %-d, %Y"
+read_time: false # reading time estimates, e.g. true
+words_per_minute: 200 # 200
+mathjax: true # MathJax equations, e.g. true
+google_fonts:
+  - name: "Source Sans Pro"
+    weights: "400,400i,700,700i"
+  - name: "Lora"
+    weights: "400,400i,700,700i"
+google_analytics: # Google Analytics id, e.g. "UA-NNNNNNNN-N"
 disqus:
-  shortname: angrypark # enter this from your disqus account
-  categories: [blog, project] # only show disqus for posts that have these categories
+  shortname: # Disqus shortname, e.g. "my_disqus_shortname"
+twitter:
+  username: # site's Twitter username, e.g. "mmistakes"
 
-# if you don't have any of social below, comment the line
-facebook: sungnam1108
-# twitter: mytwitter
-# google: mygoogle
-# instagram: myinstagram
-# pinterest: mypinterest
-# linkedin: mylinkedin
-# youtube: myyoutube
-# spotify: myspotify
-github: angrypark
-# lastfm: mylastfm
-# stackoverflow: 7044681/mystackoverflow
-# quora: userquora
-# reddit: username
-# medium: medium
-# vimeo: myvimeo
-email: sungnam1108@naver.com
+# Liquid
+liquid:
+  error_mode: strict
 
-authors:
-    angrypark:
-        name: 박성남
-        bio: 데이터 분석을 공부하는 박성남입니다.
-        external-image: false
-        picture: assets/images/profile.jpg
-        facebook: sungnam1108
+# Build settings
+permalink: /:categories/:title/
+markdown: kramdown
+feed:
+  path: atom.xml
 
-# do you want a larger site? change the option below
-# options: [normal, large] | default: normal
-# normal = 560px / large = 810px
-width: large
+# Pagination - https://jekyllrb.com/docs/pagination/
+# paginate: 10
+# paginate_path: /page:num/
 
-# if you don't need pagination, comment the *paginate* configs below
-# paginate: 5
-# paginate_path: "blog/:num/"
+# Search
+search_full_content: true # can have performance implications for large sites
 
-# if you don't need projects, comment the *projects* configs below
-projects: true
+# Taxonomy pages
+# category_archive_path: "/categories/#"
+# tag_archive_path: "/tags/#"
 
-# if you don't need "about" or "blog", comment them out below
-about: true
-blog: true
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
 
-# do you want to show the "read time" of the posts?
-read-time: true
-
-# do you want to show the "tags" inside the posts?
-show-tags: true
-
-# related posts inside a post?
-related: false
-
-# Display links for next and previous posts for the specified categories
-post-advance-links: [blog]
-
-# show author block at the end of a post ?
-show-author: true
-
-# do you want some animations?
-animation: true
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
 
 gems:
-  - jekyll-seo-tag
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
+  - jekyll-font-awesome-sass
 
-jekyll-mentions:
-    base_url: https://github.com
+# Front Matter Defaults
+defaults:
+  # Posts defaults
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: post
+      share: true
+
+# Site Author
+author:
+  name: 박성남
+  picture:
+  email: sungnam1108@naver.com
+  twitter:
+  links:
+    - title:
+      url: github.com/angrypark/
+      icon: fa-github
+
+# Footer Links
+footer_links:
+  - title: Github
+    url: https://github.com/angrypark
+    icon: fab fa-github-alt
+
+  - title: Facebook
+    url: https://facebook.com/sungnam1108
+    icon: fab fa-facebook-square
+
+  - title: Linkedin
+    url: https://www.linkedin.com/in/angrypark/
+    icon: fab fa-linkedin
+
+  - title: Email
+    url: mailto:sungnam1108@naver.com
+    icon: fa fa-envelope

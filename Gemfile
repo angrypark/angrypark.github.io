@@ -1,4 +1,3 @@
-source 'http://rubygems.org'
-
-gem 'github-pages'
-gem 'html-proofer'
+source "https://rubygems.org"
+gem 'jekyll-font-awesome-sass'
+gemspec

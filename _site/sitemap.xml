@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
-      <loc>http://localhost:4000/improving-deep-neural-networks/</loc>
+      <loc>http://localhost:4000/docs/blog/improving-deep-neural-networks/</loc>
       
         <lastmod>2018-05-23T18:00:00+09:00</lastmod>
       
@@ -18,7 +18,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/ISL-Ch08/</loc>
+      <loc>http://localhost:4000/docs/blog/ISL-Ch08/</loc>
       
         <lastmod>2018-02-14T18:00:00+09:00</lastmod>
       
@@ -34,7 +34,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/ISL-Ch07/</loc>
+      <loc>http://localhost:4000/docs/blog/ISL-Ch07/</loc>
       
         <lastmod>2018-02-14T18:00:00+09:00</lastmod>
       
@@ -50,7 +50,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/Week-2/</loc>
+      <loc>http://localhost:4000/docs/blog/Week-2/</loc>
       
         <lastmod>2018-01-20T00:00:00+09:00</lastmod>
       
@@ -66,7 +66,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/ISL-study/</loc>
+      <loc>http://localhost:4000/docs/blog/ISL-study/</loc>
       
         <lastmod>2018-01-17T18:47:00+09:00</lastmod>
       
@@ -82,7 +82,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/GAN-tutorial-2/</loc>
+      <loc>http://localhost:4000/docs/blog/GAN-tutorial-2/</loc>
       
         <lastmod>2017-11-18T15:10:00+09:00</lastmod>
       
@@ -98,7 +98,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/DiscoGAN-paper-reading/</loc>
+      <loc>http://localhost:4000/docs/blog/DiscoGAN-paper-reading/</loc>
       
         <lastmod>2017-09-09T20:30:00+09:00</lastmod>
       
@@ -114,7 +114,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/DCGAN-paper-reading/</loc>
+      <loc>http://localhost:4000/docs/blog/DCGAN-paper-reading/</loc>
       
         <lastmod>2017-08-03T20:30:00+09:00</lastmod>
       
@@ -130,7 +130,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/Fast-Neural-Transfer/</loc>
+      <loc>http://localhost:4000/docs/project/Fast-Neural-Transfer/</loc>
       
         <lastmod>2017-08-01T20:27:00+09:00</lastmod>
       
@@ -146,7 +146,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/Movie-Recommendation/</loc>
+      <loc>http://localhost:4000/docs/project/Movie-Recommendation/</loc>
       
         <lastmod>2017-08-01T20:27:00+09:00</lastmod>
       
@@ -162,7 +162,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/Embed-Plotly/</loc>
+      <loc>http://localhost:4000/docs/blog/Embed-Plotly/</loc>
       
         <lastmod>2017-07-27T14:01:00+09:00</lastmod>
       
@@ -178,7 +178,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/TripAdvisor-comments-analysis/</loc>
+      <loc>http://localhost:4000/docs/project/TripAdvisor-comments-analysis/</loc>
       
         <lastmod>2017-07-26T15:10:00+09:00</lastmod>
       
@@ -194,7 +194,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/GAN-tutorial-1/</loc>
+      <loc>http://localhost:4000/docs/blog/GAN-tutorial-1/</loc>
       
         <lastmod>2017-07-23T15:10:00+09:00</lastmod>
       
@@ -210,7 +210,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/First-GAN/</loc>
+      <loc>http://localhost:4000/docs/blog/First-GAN/</loc>
       
         <lastmod>2017-07-21T02:23:00+09:00</lastmod>
       
@@ -226,7 +226,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/Human-Resource-Analysis/</loc>
+      <loc>http://localhost:4000/docs/project/Human-Resource-Analysis/</loc>
       
         <lastmod>2017-07-20T14:52:00+09:00</lastmod>
       
@@ -242,7 +242,7 @@
     </url>
   
     <url>
-      <loc>http://localhost:4000/starting-my-blog/</loc>
+      <loc>http://localhost:4000/docs/blog/starting-my-blog/</loc>
       
         <lastmod>2017-07-20T02:23:00+09:00</lastmod>
       

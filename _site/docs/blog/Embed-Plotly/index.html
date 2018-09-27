@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.1.1
+    Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    <title>[Visualization] Markdown에 plotly 그래프 넣기</title>
+    <meta name="description" content="요약">
+    <link rel="canonical" href="http://localhost:4000/docs/blog/Embed-Plotly/">
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  visualization-markdown에-plotly-그래프-넣기">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/about/">About me</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="angrypark">
+        <img src="/images/profile-icon.jpg" class="site-logo-img animated fadeInDown" alt="angrypark">
+      </a>
+    
+    
+      <h1 class="site-title animated fadeIn"><a href="/">angrypark</a></h1>
+      <p class="site-description animated fadeIn" itemprop="description">머신러닝을 공부하는 박성남입니다.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+  
+  
+  
+
+  <div class="page-image">
+    <img src="/assets/images/170720/background.jpeg" class="entry-feature-image u-photo" alt="[Visualization] Markdown에 plotly 그래프 넣기" >
+    
+  </div>
+
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">[Visualization] Markdown에 plotly 그래프 넣기
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+    <time class="page-date dt-published" datetime="2017-07-27T14:01:00+09:00"><a class="u-url" href="">July 27, 2017</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy">docs</li><li class="page-taxonomy">blog</li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy">plotly</li><li class="page-taxonomy">blog</li><li class="page-taxonomy">interactive graph</li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <p><span style="color:#7C7877; font-family: 'Apple SD Gothic Neo'; font-weight:200"></span></p>
+<h2 id="요약">요약</h2>
+
+<p>이번 포스트에서는 블로그나 기타 markdown을 작성할 때 쉽게 interactive한 graph를 넣는 방법을 소개한다.</p>
+
+<ul>
+  <li><a href="#plotly">Plotly?</a></li>
+  <li><a href="#예시">예시</a></li>
+  <li><a href="#결과">결과</a></li>
+</ul>
+
+<hr />
+<h2 id="plotly">Plotly?</h2>
+<p>plotly는 간단한 막대그래프에서부터 3차원의 복잡한 그래프까지 누구나 쉽게 예쁜 차트를 만들 수 있는 시각화 오픈 소스이다. 데이터 분석에서 가장 많이 쓰이는 언어인 R과 Python 뿐만 아니라 Javascript까지 완벽하게 호환되며 프로그래밍 언어를 모르더라도 데이터만 가져와서 그래프를 만들 수 있다. 특히 기본적으로 그래프를 만든 뒤에, 쉽게 색깔이나 점 모양, 크기 등을 세부적으로 조절할 수 있어서 매력적이고, interactive한 그래프이기 때문에 그래프를 돌려본다거나, 확대한다거나 같은 일들도 쉽게 할 수 있다. 기본적으로는 ipython notebook을 사용할 때 이용하지만, 이를 markdown에 embed할 수 있다면 결과물을 만들 때 훨씬 유용할 것이라 생각한다.</p>
+
+<hr />
+<h2 id="예시">예시</h2>
+<h4 id="데이터-전처리를-위한-모듈-불러오기">데이터 전처리를 위한 모듈 불러오기</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">plotly.plotly</span> <span class="k">as</span> <span class="n">py</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+</code></pre></div></div>
+
+<h4 id="plotly-로그인">plotly 로그인</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">py</span><span class="o">.</span><span class="n">sign_in</span><span class="p">(</span><span class="s">'your_username'</span><span class="p">,</span><span class="s">'your_api_key'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="데이터-만들고-시각화">데이터 만들고 시각화</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="n">scl</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="s">'rgb(242,240,247)'</span><span class="p">],[</span><span class="mf">0.2</span><span class="p">,</span> <span class="s">'rgb(218,218,235)'</span><span class="p">],[</span><span class="mf">0.4</span><span class="p">,</span> <span class="s">'rgb(188,189,220)'</span><span class="p">],</span>\
+            <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="s">'rgb(158,154,200)'</span><span class="p">],[</span><span class="mf">0.8</span><span class="p">,</span> <span class="s">'rgb(117,107,177)'</span><span class="p">],[</span><span class="mf">1.0</span><span class="p">,</span> <span class="s">'rgb(84,39,143)'</span><span class="p">]]</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s">'text'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'state'</span><span class="p">]</span> <span class="o">+</span> <span class="s">'&lt;br&gt;'</span> <span class="o">+</span>\
+    <span class="s">'Beef '</span><span class="o">+</span><span class="n">df</span><span class="p">[</span><span class="s">'beef'</span><span class="p">]</span><span class="o">+</span><span class="s">' Dairy '</span><span class="o">+</span><span class="n">df</span><span class="p">[</span><span class="s">'dairy'</span><span class="p">]</span><span class="o">+</span><span class="s">'&lt;br&gt;'</span><span class="o">+</span>\
+    <span class="s">'Fruits '</span><span class="o">+</span><span class="n">df</span><span class="p">[</span><span class="s">'total fruits'</span><span class="p">]</span><span class="o">+</span><span class="s">' Veggies '</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s">'total veggies'</span><span class="p">]</span><span class="o">+</span><span class="s">'&lt;br&gt;'</span><span class="o">+</span>\
+    <span class="s">'Wheat '</span><span class="o">+</span><span class="n">df</span><span class="p">[</span><span class="s">'wheat'</span><span class="p">]</span><span class="o">+</span><span class="s">' Corn '</span><span class="o">+</span><span class="n">df</span><span class="p">[</span><span class="s">'corn'</span><span class="p">]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s">'choropleth'</span><span class="p">,</span>
+        <span class="n">colorscale</span> <span class="o">=</span> <span class="n">scl</span><span class="p">,</span>
+        <span class="n">autocolorscale</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="n">locations</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'code'</span><span class="p">],</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'total exports'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+        <span class="n">locationmode</span> <span class="o">=</span> <span class="s">'USA-states'</span><span class="p">,</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'text'</span><span class="p">],</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span> <span class="p">(</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="s">'rgb(255,255,255)'</span><span class="p">,</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="p">)</span> <span class="p">),</span>
+        <span class="n">colorbar</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s">"Millions USD"</span><span class="p">)</span>
+        <span class="p">)</span> <span class="p">]</span>
+
+<span class="n">layout</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s">'2011 US Agriculture Exports by State&lt;br&gt;(Hover for breakdown)'</span><span class="p">,</span>
+        <span class="n">geo</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">scope</span><span class="o">=</span><span class="s">'usa'</span><span class="p">,</span>
+            <span class="n">projection</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span> <span class="nb">type</span><span class="o">=</span><span class="s">'albers usa'</span> <span class="p">),</span>
+            <span class="n">showlakes</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="n">lakecolor</span> <span class="o">=</span> <span class="s">'rgb(255, 255, 255)'</span><span class="p">),</span>
+             <span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span> <span class="p">)</span>
+<span class="n">py</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span> <span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">'d3-cloropleth-map'</span> <span class="p">)</span>
+</code></pre></div></div>
+<hr />
+<h2 id="결과">결과</h2>
+<p>기본적으로 png나 jpg로 export 가능하기 때문에 markdown에 그 결과를 사진으로 보여주는 것은 어렵지 않다.</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">결과</span><span class="p">](</span><span class="sx">/your_directory/your_graph.jpg</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img src="/assets/images/2017-07-27-Embed-Plotly/graph.png" alt="결과" /></p>
+
+<p>그러나 이는 단순 스크린샷일 뿐, 세부적으로 각 항목이 수치가 얼마나 되는지도 알 수 없고 그래프가 복잡해지거나 3차원이 될 때 보기가 힘들다.</p>
+
+<p>따라서 이를 해결하기 위해 다음과 같은 과정을 거치면 interactive한 그래프를 넣을 수 있다.</p>
+
+<ol>
+  <li><a href="#데이터-만들고-시각화">위의 코드</a>를 실행하였을 때 그래프 우측 하단에 있는 <strong>edit chart</strong> 클릭</li>
+  <li>여기서 세부적인 색깔 조정, 크기 조정 등을 할 수 있음. 좌측 하단에 있는 <strong>share</strong> 클릭
+<img src="/assets/images/2017-07-27-Embed-Plotly/share.png" alt="share" /></li>
+  <li>거기서 <strong>embed</strong> 를 클릭하면 본인 plotly 사이트를 통해 연동할 수 있는 iframe 링크 생성 가능!
+<img src="/assets/images/2017-07-27-Embed-Plotly/embed.png" alt="embed" /></li>
+</ol>
+
+<h4 id="interactive-map-visualization">interactive map visualization</h4>
+
+<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~sungnampark/473.embed"></iframe>
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/docs/project/TripAdvisor-comments-analysis/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> [CRM] TripAdvisor Comments Analysis
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/docs/project/Movie-Recommendation/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        [Kaggle] Movie Recommendation
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/angrypark"><i class="fab fa-github-alt fa-2x" title="Github"></i></a><a class="social-icon" href="https://facebook.com/sungnam1108"><i class="fab fa-facebook-square fa-2x" title="Facebook"></i></a><a class="social-icon" href="https://www.linkedin.com/in/angrypark/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a><a class="social-icon" href="mailto:sungnam1108@naver.com"><i class="fa fa-envelope fa-2x" title="Email"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2018 angrypark. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  </body>
+
+</html>

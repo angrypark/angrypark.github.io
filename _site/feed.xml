@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title></title>
-    <description>angrypark</description>
+    <title>angrypark</title>
+    <description>머신러닝을 공부하는 박성남입니다.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 27 Sep 2018 11:51:24 +0900</pubDate>
-    <lastBuildDate>Thu, 27 Sep 2018 11:51:24 +0900</lastBuildDate>
-    <generator>Jekyll v3.7.4</generator>
+    <pubDate>Thu, 27 Sep 2018 15:26:32 +0900</pubDate>
+    <lastBuildDate>Thu, 27 Sep 2018 15:26:32 +0900</lastBuildDate>
+    <generator>Jekyll v3.8.4</generator>
     
       <item>
         <title>[DL] Improving Deep Neural Networks - Hyperparameter Tuning </title>
@@ -165,13 +165,15 @@ x += -lr * dx / (np.sqrt(cache)+eps)
 &lt;/ul&gt;
 </description>
         <pubDate>Wed, 23 May 2018 18:00:00 +0900</pubDate>
-        <link>http://localhost:4000/improving-deep-neural-networks/</link>
-        <guid isPermaLink="true">http://localhost:4000/improving-deep-neural-networks/</guid>
+        <link>http://localhost:4000/docs/blog/improving-deep-neural-networks/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/improving-deep-neural-networks/</guid>
         
         <category>Deep Learning</category>
         
         <category>Hyperparameter Tuning</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -298,8 +300,8 @@ y_i = \beta_{01}+\beta_{11}x_i+\beta_{21}x_i^2+\beta_{31}x_i^3 (x_i&lt;c) %]]&gt
 &lt;hr /&gt;
 </description>
         <pubDate>Wed, 14 Feb 2018 18:00:00 +0900</pubDate>
-        <link>http://localhost:4000/ISL-Ch08/</link>
-        <guid isPermaLink="true">http://localhost:4000/ISL-Ch08/</guid>
+        <link>http://localhost:4000/docs/blog/ISL-Ch08/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/ISL-Ch08/</guid>
         
         <category>machine learning</category>
         
@@ -307,6 +309,8 @@ y_i = \beta_{01}+\beta_{11}x_i+\beta_{21}x_i^2+\beta_{31}x_i^3 (x_i&lt;c) %]]&gt
         
         <category>ISL</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -433,8 +437,8 @@ y_i = \beta_{01}+\beta_{11}x_i+\beta_{21}x_i^2+\beta_{31}x_i^3 (x_i&lt;c) %]]&gt
 &lt;hr /&gt;
 </description>
         <pubDate>Wed, 14 Feb 2018 18:00:00 +0900</pubDate>
-        <link>http://localhost:4000/ISL-Ch07/</link>
-        <guid isPermaLink="true">http://localhost:4000/ISL-Ch07/</guid>
+        <link>http://localhost:4000/docs/blog/ISL-Ch07/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/ISL-Ch07/</guid>
         
         <category>machine learning</category>
         
@@ -442,6 +446,8 @@ y_i = \beta_{01}+\beta_{11}x_i+\beta_{21}x_i^2+\beta_{31}x_i^3 (x_i&lt;c) %]]&gt
         
         <category>ISL</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -517,8 +523,8 @@ VGG는 2014년 ILSVRC에서 GoogLeNet과 함께 높은 성능을 보여준 네�
 &lt;hr /&gt;
 </description>
         <pubDate>Sat, 20 Jan 2018 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/Week-2/</link>
-        <guid isPermaLink="true">http://localhost:4000/Week-2/</guid>
+        <link>http://localhost:4000/docs/blog/Week-2/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/Week-2/</guid>
         
         <category>Deep Learning</category>
         
@@ -526,6 +532,8 @@ VGG는 2014년 ILSVRC에서 GoogLeNet과 함께 높은 성능을 보여준 네�
         
         <category>Convolutional Neural Networks</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -700,8 +708,8 @@ VGG는 2014년 ILSVRC에서 GoogLeNet과 함께 높은 성능을 보여준 네�
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 17 Jan 2018 18:47:00 +0900</pubDate>
-        <link>http://localhost:4000/ISL-study/</link>
-        <guid isPermaLink="true">http://localhost:4000/ISL-study/</guid>
+        <link>http://localhost:4000/docs/blog/ISL-study/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/ISL-study/</guid>
         
         <category>machine learning</category>
         
@@ -709,6 +717,8 @@ VGG는 2014년 ILSVRC에서 GoogLeNet과 함께 높은 성능을 보여준 네�
         
         <category>ISL</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -974,8 +984,8 @@ VGG는 2014년 ILSVRC에서 GoogLeNet과 함께 높은 성능을 보여준 네�
 &lt;hr /&gt;
 </description>
         <pubDate>Sat, 18 Nov 2017 15:10:00 +0900</pubDate>
-        <link>http://localhost:4000/GAN-tutorial-2/</link>
-        <guid isPermaLink="true">http://localhost:4000/GAN-tutorial-2/</guid>
+        <link>http://localhost:4000/docs/blog/GAN-tutorial-2/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/GAN-tutorial-2/</guid>
         
         <category>gan</category>
         
@@ -985,6 +995,8 @@ VGG는 2014년 ILSVRC에서 GoogLeNet과 함께 높은 성능을 보여준 네�
         
         <category>ybigta</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -1122,8 +1134,8 @@ L_G &amp;amp;=&amp;amp; L_{G_{AB}} + L_{G_{AB}} &lt;br /&gt;
 &lt;hr /&gt;
 </description>
         <pubDate>Sat, 09 Sep 2017 20:30:00 +0900</pubDate>
-        <link>http://localhost:4000/DiscoGAN-paper-reading/</link>
-        <guid isPermaLink="true">http://localhost:4000/DiscoGAN-paper-reading/</guid>
+        <link>http://localhost:4000/docs/blog/DiscoGAN-paper-reading/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/DiscoGAN-paper-reading/</guid>
         
         <category>gan</category>
         
@@ -1135,6 +1147,8 @@ L_G &amp;amp;=&amp;amp; L_{G_{AB}} + L_{G_{AB}} &lt;br /&gt;
         
         <category>disco-gan</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -1298,8 +1312,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
 &lt;hr /&gt;
 </description>
         <pubDate>Thu, 03 Aug 2017 20:30:00 +0900</pubDate>
-        <link>http://localhost:4000/DCGAN-paper-reading/</link>
-        <guid isPermaLink="true">http://localhost:4000/DCGAN-paper-reading/</guid>
+        <link>http://localhost:4000/docs/blog/DCGAN-paper-reading/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/DCGAN-paper-reading/</guid>
         
         <category>gan</category>
         
@@ -1311,6 +1325,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
         
         <category>dcgan</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -1348,8 +1364,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
 &lt;hr /&gt;
 </description>
         <pubDate>Tue, 01 Aug 2017 20:27:00 +0900</pubDate>
-        <link>http://localhost:4000/Fast-Neural-Transfer/</link>
-        <guid isPermaLink="true">http://localhost:4000/Fast-Neural-Transfer/</guid>
+        <link>http://localhost:4000/docs/project/Fast-Neural-Transfer/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/project/Fast-Neural-Transfer/</guid>
         
         <category>deep learning</category>
         
@@ -1357,6 +1373,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
         
         <category>pytorch</category>
         
+        
+        <category>docs</category>
         
         <category>project</category>
         
@@ -1400,8 +1418,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
 &lt;hr /&gt;
 </description>
         <pubDate>Tue, 01 Aug 2017 20:27:00 +0900</pubDate>
-        <link>http://localhost:4000/Movie-Recommendation/</link>
-        <guid isPermaLink="true">http://localhost:4000/Movie-Recommendation/</guid>
+        <link>http://localhost:4000/docs/project/Movie-Recommendation/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/project/Movie-Recommendation/</guid>
         
         <category>recommendation</category>
         
@@ -1409,6 +1427,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
         
         <category>kaggle</category>
         
+        
+        <category>docs</category>
         
         <category>project</category>
         
@@ -1509,8 +1529,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
 &lt;iframe width=&quot;900&quot; height=&quot;800&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; src=&quot;//plot.ly/~sungnampark/473.embed&quot;&gt;&lt;/iframe&gt;
 </description>
         <pubDate>Thu, 27 Jul 2017 14:01:00 +0900</pubDate>
-        <link>http://localhost:4000/Embed-Plotly/</link>
-        <guid isPermaLink="true">http://localhost:4000/Embed-Plotly/</guid>
+        <link>http://localhost:4000/docs/blog/Embed-Plotly/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/Embed-Plotly/</guid>
         
         <category>plotly</category>
         
@@ -1518,6 +1538,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
         
         <category>interactive graph</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -1736,8 +1758,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
 &lt;hr /&gt;
 </description>
         <pubDate>Wed, 26 Jul 2017 15:10:00 +0900</pubDate>
-        <link>http://localhost:4000/TripAdvisor-comments-analysis/</link>
-        <guid isPermaLink="true">http://localhost:4000/TripAdvisor-comments-analysis/</guid>
+        <link>http://localhost:4000/docs/project/TripAdvisor-comments-analysis/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/project/TripAdvisor-comments-analysis/</guid>
         
         <category>tripadvisor</category>
         
@@ -1747,6 +1769,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
         
         <category>comment analysis</category>
         
+        
+        <category>docs</category>
         
         <category>project</category>
         
@@ -2016,8 +2040,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
 &lt;hr /&gt;
 </description>
         <pubDate>Sun, 23 Jul 2017 15:10:00 +0900</pubDate>
-        <link>http://localhost:4000/GAN-tutorial-1/</link>
-        <guid isPermaLink="true">http://localhost:4000/GAN-tutorial-1/</guid>
+        <link>http://localhost:4000/docs/blog/GAN-tutorial-1/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/GAN-tutorial-1/</guid>
         
         <category>gan</category>
         
@@ -2027,6 +2051,8 @@ Batch Normalization은 2015년 arXiv에 발표된 후 ICML 2015에 publish 된 �
         
         <category>ybigta</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -2227,8 +2253,8 @@ Discriminative distribution(${D}$, 파란 점선)을 data generating distributio
 &lt;hr /&gt;
 </description>
         <pubDate>Fri, 21 Jul 2017 02:23:00 +0900</pubDate>
-        <link>http://localhost:4000/First-GAN/</link>
-        <guid isPermaLink="true">http://localhost:4000/First-GAN/</guid>
+        <link>http://localhost:4000/docs/blog/First-GAN/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/First-GAN/</guid>
         
         <category>deep learning</category>
         
@@ -2238,6 +2264,8 @@ Discriminative distribution(${D}$, 파란 점선)을 data generating distributio
         
         <category>data science</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
@@ -2636,8 +2664,8 @@ KerasClassifier Results: 86.92% (1.50%)
 &lt;hr /&gt;
 </description>
         <pubDate>Thu, 20 Jul 2017 14:52:00 +0900</pubDate>
-        <link>http://localhost:4000/Human-Resource-Analysis/</link>
-        <guid isPermaLink="true">http://localhost:4000/Human-Resource-Analysis/</guid>
+        <link>http://localhost:4000/docs/project/Human-Resource-Analysis/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/project/Human-Resource-Analysis/</guid>
         
         <category>Kaggle</category>
         
@@ -2645,6 +2673,8 @@ KerasClassifier Results: 86.92% (1.50%)
         
         <category>data analysis</category>
         
+        
+        <category>docs</category>
         
         <category>project</category>
         
@@ -2727,8 +2757,8 @@ $git push origin master
 &lt;p&gt;Markdown-syntax : &lt;a href=&quot;https://simhyejin.github.io/2016/06/30/Markdown-syntax&quot;&gt;https://simhyejin.github.io/2016/06/30/Markdown-syntax&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 20 Jul 2017 02:23:00 +0900</pubDate>
-        <link>http://localhost:4000/starting-my-blog/</link>
-        <guid isPermaLink="true">http://localhost:4000/starting-my-blog/</guid>
+        <link>http://localhost:4000/docs/blog/starting-my-blog/</link>
+        <guid isPermaLink="true">http://localhost:4000/docs/blog/starting-my-blog/</guid>
         
         <category>github</category>
         
@@ -2736,6 +2766,8 @@ $git push origin master
         
         <category>jekyll</category>
         
+        
+        <category>docs</category>
         
         <category>blog</category>
         
