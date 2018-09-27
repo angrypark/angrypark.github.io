@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: http://angrypark.github.io/sitemap.xml

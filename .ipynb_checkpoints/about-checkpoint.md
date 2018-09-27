@@ -2,7 +2,7 @@
 title: About
 layout: page
 ---
-![Profile Image](assets/images/about_me.jpeg)
+![Profile Image](./assets/images/about_me.jpeg)
 
 <center><h2>
 머신러닝을 공부하고 있는 박성남입니다.

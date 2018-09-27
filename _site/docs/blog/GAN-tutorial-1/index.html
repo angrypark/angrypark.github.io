@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.1.1
+    Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    <title>[GAN] 1D Gaussian Distribution Generation</title>
+    <meta name="description" content="">
+    <link rel="canonical" href="http://localhost:4000/docs/blog/GAN-tutorial-1/">
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  gan-1d-gaussian-distribution-generation">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/about/">About me</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="angrypark">
+        <img src="/images/profile-icon.jpg" class="site-logo-img animated fadeInDown" alt="angrypark">
+      </a>
+    
+    
+      <h1 class="site-title animated fadeIn"><a href="/">angrypark</a></h1>
+      <p class="site-description animated fadeIn" itemprop="description">머신러닝을 공부하는 박성남입니다.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+  
+  
+  
+
+  <div class="page-image">
+    <img src="/assets/images/170721-first-gan/background.png" class="entry-feature-image u-photo" alt="[GAN] 1D Gaussian Distribution Generation" >
+    
+  </div>
+
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">[GAN] 1D Gaussian Distribution Generation
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+    <time class="page-date dt-published" datetime="2017-07-23T15:10:00+09:00"><a class="u-url" href="">July 23, 2017</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy">docs</li><li class="page-taxonomy">blog</li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy">gan</li><li class="page-taxonomy">pytorch</li><li class="page-taxonomy">deep learning</li><li class="page-taxonomy">ybigta</li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <p><span style="color:#7C7877; font-family: 'Apple SD Gothic Neo'; font-weight:200"></span></p>
+
+<h2 id="요약">요약</h2>
+
+<p>연세대학교 빅데이터 학회 YBIGTA의 GAN팀에서 준비한 두번째 시간에는 GAN을 활용하여 1D Gaussian Distribution을 generate하는 튜토리얼을 살펴보았다.</p>
+
+<p><strong>목차</strong></p>
+
+<ul>
+  <li><a href="#gan">GAN?</a></li>
+  <li><a href="#1d-gaussian-distribution">1D Gaussian Distribution</a></li>
+  <li><a href="#workflow">Workflow</a></li>
+  <li><a href="#algorithm">Algorithm</a></li>
+  <li><a href="#visualization">Visualization</a></li>
+  <li><a href="#reference">Reference</a></li>
+</ul>
+
+<hr />
+<h2 id="gan">GAN?</h2>
+<p>GAN에 대해 간단히 복습하자면, GAN(Generative Adversarial Nets)이란 서로 대립하는 두 개의 신경망을 동시에 학습시키면서 원본의 sample과 유사한 sample을 만들어내는 방식을 말한다.</p>
+
+<p>가장 중요한 두 개의 역할이 바로 <strong>Generator</strong> 와 <strong>Discriminator</strong> 인데, 지폐 위조 범죄에 비추어 예시를 들자면, Generator는 실제 지폐와 똑같이 생긴 지폐를 만들려고 노력하는 <strong>위조지폐범</strong> 이고 Discriminator는 이를 제대로 구별하려는 <strong>경찰</strong> 이다.</p>
+
+<p>기존의 하나의 cost function을 가지고 이를 최적화 했던 다른 신경망 방식과 다르게, 두 개의 신경망을 동시에 학습시키면서 Generator는 Discriminator의 구분 확률을 최대한 줄이고, 이와 동시에 Discriminator는 real sample(실제 지폐)와 fake sample(위조 지폐)의 구분 정확도를 높이는 목적을 두고 있다.</p>
+
+<p>NIPS2016에서 저자인 Ian Goodfellow가 발표한 내용에 따르면, GAN은 다음과 같은 상황에서 매우 뛰어난 성능을 보여준다.</p>
+
+<p><img src="/assets/images/2017-07-23-GAN-tutorial-1/why-gan.png" alt="Why GAN?" /></p>
+
+<p>가장 핵심은, GAN은 기존의 머신러닝 기법과 같이 원데이터의 분포에 대해 직접적으로 알아내고 분석한다기보다는, 원데이터와 최대한 비슷한 sample을 만들어내는 데에만 목표를 둔다는 점이다. 따라서 원데이터가 매우 복잡하고 고차원이거나, 결측치가 많거나, 원데이터가 무한히 많을 때 좋은 성능을 보여준다.</p>
+
+<p>더 자세한 내용은 저번 포스트(<a href="https://angrypark.github.io/First-GAN/">Link</a>)를 참고하기 바란다.</p>
+
+<hr />
+<h2 id="1d-gaussian-distribution">1D Gaussian Distribution</h2>
+
+<p>GAN 첫번째 튜토리얼로는 정규분포를 만든 다음에 이를 GAN을 활용해서 최대한 비슷하게 generate해보았다. 작업 환경은 다음과 같다.</p>
+
+<ul>
+  <li>Python : 3.6.1</li>
+  <li>Pytorch : 0.1.12</li>
+  <li>OS : MAC OSX</li>
+</ul>
+
+<h4 id="why-pytorch">Why Pytorch?</h4>
+<p>이 튜토리얼과 관련하여 TensorFlow, Keras, Pytorch로 구현한 모든 github 예제를 분석해보았는데, 처음엔 TensorFlow 코드를 보고 이를 Pytorch로 바꾸어볼려고 했지만, 둘 다 사용법이 미숙하니 시간상으로 도저히 안되겠다는 것을 느꼈다. 그래서 (<em>팀장님이 추천해주시기도 했고</em>) 코드가 비교적 간단한 pytorch로 보기로 했다. 이거 결정하는 데만 시간이 엄청 걸렸다..ㅠ</p>
+
+<hr />
+<h2 id="workflow">Workflow</h2>
+<p>코드의 workflow는 다음과 같다.</p>
+
+<p><img src="/assets/images/2017-07-23-GAN-tutorial-1/code-workflow.jpg" alt="workflow" /></p>
+
+<p>먼저 Generator의 입장에서 말하자면, 입력값은 0과 1사이의 임의의 값이고, 이를 노이즈를 줘서 fake sample을 만들어 Discriminator에게 보낸다. 후에, Discriminator의 반응에 따라 신경망을 최적화하는데, 즉 어떤 sample에 대해서는 1(real)이라 반응했다 / 어떤 sample은 0(fake)이라 반응했다 의 여부에 따라 Generator가 최적화되는 것이다. 인상깊은 점은 <strong>Generator는 sample이 실제로 real sample인지 fake sample인지 모른다.</strong> 다만 Discriminator가 어떻게 평가했는지의 여부만 보고 최적화하는 것이다.</p>
+
+<p>다음으로 Discriminator의 입장에서 말하지면, 입력값은 real data와 fake data이고 이들이 실제로 real인지 fake인지의 여부이다. 일단 본인이 알아서 평가한 후에, 실제 real/fake 여부에 따라 본인을 최적화한다. 이 때 본인이 평가한 정보를 Generator에게 보낸다.</p>
+
+<hr />
+<h2 id="algorithm">Algorithm</h2>
+
+<h4 id="필요한-라이브러리-불러오기">필요한 라이브러리 불러오기</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+
+<span class="kn">import</span> <span class="nn">cufflinks</span> <span class="k">as</span> <span class="n">cf</span>
+<span class="kn">import</span> <span class="nn">plotly</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">set_credentials_file</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">'your_username'</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s">'your_api_key'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="파라미터-선정">파라미터 선정</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 모집단의 평균, 표준편차 지정 : 실제 지폐의 모양</span>
+<span class="n">data_mean</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">data_stddev</span> <span class="o">=</span> <span class="mf">1.25</span>
+
+<span class="c"># 모델의 파라미터 지정</span>
+<span class="n">g_input_size</span> <span class="o">=</span> <span class="mi">1</span>     <span class="c"># Random noise dimension coming into generator, per output vector : (1,N)</span>
+<span class="n">g_hidden_size</span> <span class="o">=</span> <span class="mi">50</span>   <span class="c"># G의 레이어 크기</span>
+<span class="n">g_output_size</span> <span class="o">=</span> <span class="mi">1</span>    <span class="c"># G의 결과값의 크기 : (1,N) - 위조 지폐의 크기</span>
+<span class="n">d_input_size</span> <span class="o">=</span> <span class="mi">100</span>   <span class="c"># Minibatch size - cardinality of distributions</span>
+<span class="n">d_hidden_size</span> <span class="o">=</span> <span class="mi">50</span>   <span class="c"># D의 레이어 크기</span>
+<span class="n">d_output_size</span> <span class="o">=</span> <span class="mi">1</span>    <span class="c"># 진짜인지 가짜인지의 여부(확률값) : (1,1)</span>
+<span class="n">minibatch_size</span> <span class="o">=</span> <span class="n">d_input_size</span>
+
+<span class="n">d_learning_rate</span> <span class="o">=</span> <span class="mf">2e-4</span>  <span class="c"># 2e-4</span>
+<span class="n">g_learning_rate</span> <span class="o">=</span> <span class="mf">2e-4</span>
+<span class="n">optim_betas</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">)</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">2400</span>
+<span class="n">print_interval</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">d_steps</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c"># 'k' steps in the original GAN paper. Can put the discriminator on higher training freq than generator</span>
+<span class="n">g_steps</span> <span class="o">=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<h4 id="데이터-입력-관련-함수들">데이터 입력 관련 함수들</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># preprocess : data를 입력받고 preprocessing</span>
+<span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">preprocess</span><span class="p">,</span> <span class="n">d_input_func</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="s">"Data and variances"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="n">decorate_with_diffs</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Using data [</span><span class="si">%</span><span class="s">s]"</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+<span class="c"># ##### DATA: Target data and generator input data</span>
+
+<span class="c"># 한번에 바로 평균이 mu이고 표준편차가 sigma인 정규분포에서 샘플 (1,n)개 뽑기</span>
+<span class="k">def</span> <span class="nf">get_distribution_sampler</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>  <span class="c"># Gaussian</span>
+
+<span class="c"># 0부터 1사이의 숫자중 임의로 샘플 (m,n)개 뽑기</span>
+<span class="k">def</span> <span class="nf">get_generator_input_sampler</span><span class="p">():</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>  <span class="c"># Uniform-dist data into generator, _NOT_ Gaussian</span>
+</code></pre></div></div>
+
+<h4 id="generator--discriminator">Generator &amp; Discriminator</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Generator</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">output_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Generator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">output_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Discriminator</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">output_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Discriminator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">output_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map3</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="기타-함수들">기타 함수들</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># data의 정보를 리스트화하여 반환</span>
+<span class="k">def</span> <span class="nf">extract</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">v</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">storage</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c"># data의 평균과 표준편차 반환</span>
+<span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span>
+
+<span class="c"># data를 입력받으면, data에 정규화한 data를 가로로 붙여서 반환</span>
+<span class="k">def</span> <span class="nf">decorate_with_diffs</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">exponent</span><span class="p">):</span>
+    <span class="c"># torch.mean(data,1) : (m,n)크기의 샘플을 각 행별로 평균을 구해서 (m,1)크기로 반환</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># torch.ones(m,n) : (m,n)크기의 1로만 이루어진 벡터</span>
+    <span class="c"># mean.tolist()[0][0] : data의 1행의 평균</span>
+    <span class="c"># mean_broadcast : data와 같은 크기의 벡터, 모든 성분은 data의 1행의 평균으로 구성됨</span>
+    <span class="n">mean_broadcast</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">mean</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c"># diffs : dat에서 mean_broadcast를 뺀 후 이를 exponet제곱한다</span>
+    <span class="n">diffs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="nb">pow</span><span class="p">(</span><span class="n">data</span> <span class="o">-</span> <span class="n">Variable</span><span class="p">(</span><span class="n">mean_broadcast</span><span class="p">),</span> <span class="n">exponent</span><span class="p">)</span>
+
+    <span class="c"># torch.cat : concat의 의미, 0이면 세로로 붙이고, 1이면 가로로 붙임</span>
+    <span class="c"># return : data와 diff를 이어서 반환</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">data</span><span class="p">,</span> <span class="n">diffs</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># d_sampler : data의 평균과 표준편차와 같은 평균과 표준편차를 가지는 정규분포에서 sample뽑는 함수 : d_sampler(N)</span>
+<span class="n">d_sampler</span> <span class="o">=</span> <span class="n">get_distribution_sampler</span><span class="p">(</span><span class="n">data_mean</span><span class="p">,</span> <span class="n">data_stddev</span><span class="p">)</span>
+
+<span class="c"># 임의의 0에서 1사이의 N개의 sample 뽑는 함수 : gi_sampler(N)</span>
+<span class="n">gi_sampler</span> <span class="o">=</span> <span class="n">get_generator_input_sampler</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="gdoptimizer-정의">G,D,optimizer 정의</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># G와 D 정의</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">Generator</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">g_input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="n">g_hidden_size</span><span class="p">,</span> <span class="n">output_size</span><span class="o">=</span><span class="n">g_output_size</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">Discriminator</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">d_input_func</span><span class="p">(</span><span class="n">d_input_size</span><span class="p">),</span> <span class="n">hidden_size</span><span class="o">=</span><span class="n">d_hidden_size</span><span class="p">,</span> <span class="n">output_size</span><span class="o">=</span><span class="n">d_output_size</span><span class="p">)</span>
+
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>  <span class="c"># Binary cross entropy: http://pytorch.org/docs/nn.html#bceloss</span>
+
+<span class="c"># Optimizer 정의</span>
+<span class="n">d_optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">d_learning_rate</span><span class="p">,</span> <span class="n">betas</span><span class="o">=</span><span class="n">optim_betas</span><span class="p">)</span>
+<span class="n">g_optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">g_learning_rate</span><span class="p">,</span> <span class="n">betas</span><span class="o">=</span><span class="n">optim_betas</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="학습-시작">학습 시작</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">d_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d_steps</span><span class="p">):</span>
+        <span class="c"># 1. Train D on real+fake</span>
+        <span class="n">D</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="c">#  1A: 실제 데이터로 D 학습</span>
+        <span class="n">d_real_data</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">d_sampler</span><span class="p">(</span><span class="n">d_input_size</span><span class="p">))</span>
+        <span class="n">d_real_decision</span> <span class="o">=</span> <span class="n">D</span><span class="p">(</span><span class="n">preprocess</span><span class="p">(</span><span class="n">d_real_data</span><span class="p">))</span>
+        <span class="n">d_real_error</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">d_real_decision</span><span class="p">,</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>  <span class="c"># ones = true</span>
+        <span class="n">d_real_error</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> <span class="c"># compute/store gradients, but don't change params</span>
+
+        <span class="c">#  1B: 가짜 데이터로 D 학습</span>
+        <span class="n">d_gen_input</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">gi_sampler</span><span class="p">(</span><span class="n">minibatch_size</span><span class="p">,</span> <span class="n">g_input_size</span><span class="p">))</span>
+        <span class="n">d_fake_data</span> <span class="o">=</span> <span class="n">G</span><span class="p">(</span><span class="n">d_gen_input</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>  <span class="c"># detach to avoid training G on these labels</span>
+        <span class="n">d_fake_decision</span> <span class="o">=</span> <span class="n">D</span><span class="p">(</span><span class="n">preprocess</span><span class="p">(</span><span class="n">d_fake_data</span><span class="o">.</span><span class="n">t</span><span class="p">()))</span>
+        <span class="n">d_fake_error</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">d_fake_decision</span><span class="p">,</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>  <span class="c"># zeros = fake</span>
+        <span class="n">d_fake_error</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">d_optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>     <span class="c"># Only optimizes D's parameters; changes based on stored gradients from backward()</span>
+
+    <span class="k">for</span> <span class="n">g_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g_steps</span><span class="p">):</span>
+
+        <span class="c"># 2. D의 반응에 따라 G학습</span>
+
+        <span class="c"># G 초기화</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="n">gen_input</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">gi_sampler</span><span class="p">(</span><span class="n">minibatch_size</span><span class="p">,</span> <span class="n">g_input_size</span><span class="p">))</span>
+        <span class="n">g_fake_data</span> <span class="o">=</span> <span class="n">G</span><span class="p">(</span><span class="n">gen_input</span><span class="p">)</span>
+        <span class="n">dg_fake_decision</span> <span class="o">=</span> <span class="n">D</span><span class="p">(</span><span class="n">preprocess</span><span class="p">(</span><span class="n">g_fake_data</span><span class="o">.</span><span class="n">t</span><span class="p">()))</span>
+        <span class="n">g_error</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">dg_fake_decision</span><span class="p">,</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>  <span class="c"># we want to fool, so pretend it's all genuine</span>
+
+        <span class="n">g_error</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">g_optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>  <span class="c"># Only optimizes G's parameters</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">print_interval</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="si">%</span><span class="s">s: D: </span><span class="si">%.4</span><span class="s">f/</span><span class="si">%.4</span><span class="s">f G: </span><span class="si">%.4</span><span class="s">f (Real: </span><span class="si">%</span><span class="s">s, Fake: </span><span class="si">%</span><span class="s">s) </span><span class="se">\n</span><span class="s">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+                                                            <span class="n">extract</span><span class="p">(</span><span class="n">d_real_error</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                                                            <span class="n">extract</span><span class="p">(</span><span class="n">d_fake_error</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                                                            <span class="n">extract</span><span class="p">(</span><span class="n">g_error</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                                                            <span class="n">stats</span><span class="p">(</span><span class="n">extract</span><span class="p">(</span><span class="n">d_real_data</span><span class="p">)),</span>
+                                                            <span class="n">stats</span><span class="p">(</span><span class="n">extract</span><span class="p">(</span><span class="n">d_fake_data</span><span class="p">))))</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">print_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">mu_real</span><span class="p">,</span> <span class="n">sigma_real</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">(</span><span class="n">extract</span><span class="p">(</span><span class="n">d_real_data</span><span class="p">))</span>
+        <span class="p">[</span><span class="n">mu_fake</span><span class="p">,</span> <span class="n">sigma_fake</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">(</span><span class="n">extract</span><span class="p">(</span><span class="n">d_fake_data</span><span class="p">))</span>
+
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu_real</span><span class="o">-</span><span class="mi">9</span><span class="o">*</span><span class="n">sigma_real</span><span class="p">,</span><span class="n">mu</span><span class="o">+</span><span class="mi">9</span><span class="o">*</span><span class="n">sigma_real</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu_fake</span><span class="o">-</span><span class="mi">9</span><span class="o">*</span><span class="n">sigma_fake</span><span class="p">,</span><span class="n">mu</span><span class="o">+</span><span class="mi">9</span><span class="o">*</span><span class="n">sigma_fake</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">mu_real</span><span class="p">,</span> <span class="n">sigma_real</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">mlab</span><span class="o">.</span><span class="n">normpdf</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">mu_fake</span><span class="p">,</span> <span class="n">sigma_fake</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Generate 1D Gaussian Distribution using GAN: </span><span class="si">%7</span><span class="s">d epoch'</span><span class="o">%</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Data values'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Probability density'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'img/Generate 1D Gaussian Distribution using GAN: </span><span class="si">%7</span><span class="s">d epoch'</span><span class="o">%</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">'.png'</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<hr />
+<h2 id="visualization">Visualization</h2>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/x7VFNpDIQ8mc2D" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen=""> </iframe>
+<div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/SungnamPark2/gan-1d-gaussian-distribution-tutorial" title="[GAN] 1D Gaussian Distribution Tutorial" target="_blank">[GAN] 1D Gaussian Distribution Tutorial</a> </strong> from <strong><a target="_blank" href="//www.slideshare.net/SungnamPark2">Sungnam Park</a></strong> </div>
+
+<hr />
+<h2 id="reference">Reference</h2>
+<p>[GAN keras code]
+ <a href="https://hussamhamdan.wordpress.com/2017/04/29/generative-adversarial-networks-keras-code/">https://hussamhamdan.wordpress.com/2017/04/29/generative-adversarial-networks-keras-code/</a></p>
+
+<p>[GAN tf code]
+<a href="https://github.com/hwalsuklee/tensorflow-GAN-1d-gaussian-ex">https://github.com/hwalsuklee/tensorflow-GAN-1d-gaussian-ex</a></p>
+
+<p>[GAN pytorch code]
+ <a href="https://medium.com/@devnag/generative-adversarial-networks-gans-in-50-lines-of-code-pytorch-e81b79659e3f">https://medium.com/@devnag/generative-adversarial-networks-gans-in-50-lines-of-code-pytorch-e81b79659e3f</a></p>
+
+<hr />
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/docs/blog/First-GAN/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> [GAN] First GAN
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/docs/project/TripAdvisor-comments-analysis/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        [CRM] TripAdvisor Comments Analysis
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/angrypark"><i class="fab fa-github-alt fa-2x" title="Github"></i></a><a class="social-icon" href="https://facebook.com/sungnam1108"><i class="fab fa-facebook-square fa-2x" title="Facebook"></i></a><a class="social-icon" href="https://www.linkedin.com/in/angrypark/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a><a class="social-icon" href="mailto:sungnam1108@naver.com"><i class="fa fa-envelope fa-2x" title="Email"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2018 angrypark. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  </body>
+
+</html>

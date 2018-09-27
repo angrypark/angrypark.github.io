@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.1.1
+    Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    <title>[Kaggle] Human Resource Data Analysis</title>
+    <meta name="description" content="">
+    <link rel="canonical" href="http://localhost:4000/docs/project/Human-Resource-Analysis/">
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i|Lora:400,400i,700,700i">
+  <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  kaggle-human-resource-data-analysis">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/about/">About me</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="angrypark">
+        <img src="/images/profile-icon.jpg" class="site-logo-img animated fadeInDown" alt="angrypark">
+      </a>
+    
+    
+      <h1 class="site-title animated fadeIn"><a href="/">angrypark</a></h1>
+      <p class="site-description animated fadeIn" itemprop="description">머신러닝을 공부하는 박성남입니다.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+  
+  
+  
+
+  <div class="page-image">
+    <img src="/assets/images/170720-HR-Analysis/background.png" class="entry-feature-image u-photo" alt="[Kaggle] Human Resource Data Analysis" >
+    
+  </div>
+
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">[Kaggle] Human Resource Data Analysis
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+    <time class="page-date dt-published" datetime="2017-07-20T14:52:00+09:00"><a class="u-url" href="">July 20, 2017</a>
+</time>
+
+  </div>
+</div>
+
+        
+  <h3 class="page-taxonomies-title">Categories</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy">docs</li><li class="page-taxonomy">project</li>
+  </ul>
+
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy">Kaggle</li><li class="page-taxonomy">HR</li><li class="page-taxonomy">data analysis</li>
+  </ul>
+
+
+      </div>
+
+      <div class="page-content">
+        <div class="e-content">
+          <p><span style="color:#7C7877; font-family: 'Apple SD Gothic Neo'; font-weight:200"></span></p>
+
+<h2 id="요약">요약</h2>
+
+<p><strong>kaggle url</strong> : https://www.kaggle.com/ludobenistant/hr-analytics</p>
+
+<p><strong>프로젝트 목표</strong> : 실제 기업의 인사 데이터를 분석하여, 퇴직할지 여부 맞추기</p>
+
+<p><strong>목차</strong></p>
+
+<ul>
+  <li><a href="#import-libraries">Import Libraries</a></li>
+  <li><a href="#데이터-전처리">데이터 전처리</a></li>
+  <li><a href="#model-1-logistic-regression">Model 1. Logistic Regression</a></li>
+  <li><a href="#model-2-decision-tree-classifier">Model 2. Decision Tree Classifier</a></li>
+  <li><a href="#model-3-randomforest-classifier">Model 3. RandomForest Classifier</a></li>
+  <li><a href="#model-4-keras-binomial-classifier">Model 4. Keras Binomial Classifier</a></li>
+  <li><a href="#발표-자료">발표 자료</a></li>
+</ul>
+
+<hr />
+<h2 id="import-libraries">Import Libraries</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</code></pre></div></div>
+
+<hr />
+<h2 id="데이터-전처리">데이터 전처리</h2>
+
+<hr />
+
+<h4 id="원본-kaggle-data-불러와서-human으로-저장">원본 Kaggle Data 불러와서 human으로 저장</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">human</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"HR_comma_sep.csv"</span><span class="p">)</span>
+<span class="n">human</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="category로-나와있던-sales-salary-column을-더미화">Category로 나와있던 ‘sales’, ‘salary’ column을 더미화</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">human</span><span class="p">[</span><span class="s">'dep'</span><span class="p">]</span> <span class="o">=</span> <span class="n">human</span><span class="p">[</span><span class="s">'sales'</span><span class="p">]</span>
+<span class="n">human_dep</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">human</span><span class="p">[</span><span class="s">'sales'</span><span class="p">])</span>
+<span class="n">human_sal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">human</span><span class="p">[</span><span class="s">'salary'</span><span class="p">])</span>
+<span class="k">del</span> <span class="n">human</span><span class="p">[</span><span class="s">'sales'</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">human</span><span class="p">[</span><span class="s">'salary'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="multicollinearity을-위해-같은-카테고리에-있던-column-중-하나씩-삭제하여-human_mul로-저장">multicollinearity을 위해 같은 카테고리에 있던 column 중 하나씩 삭제하여 human_mul로 저장</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">human</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">human</span><span class="p">,</span><span class="n">human_sal</span><span class="p">,</span><span class="n">human_dep</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c">#multicollinearity을 위해 삭제해서 human_mul로 저장</span>
+<span class="n">human_mul</span> <span class="o">=</span> <span class="n">human</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">del</span> <span class="n">human_mul</span><span class="p">[</span><span class="s">'technical'</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">human_mul</span><span class="p">[</span><span class="s">'low'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="머신러닝을-돌릴-x-feature들을-선정">머신러닝을 돌릴 X feature들을 선정</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">feature_human</span> <span class="o">=</span><span class="p">[</span><span class="s">'satisfaction_level'</span><span class="p">,</span> <span class="s">'last_evaluation'</span><span class="p">,</span> <span class="s">'number_project'</span><span class="p">,</span>
+       <span class="s">'average_montly_hours'</span><span class="p">,</span> <span class="s">'time_spend_company'</span><span class="p">,</span> <span class="s">'Work_accident'</span><span class="p">,</span>
+       <span class="s">'promotion_last_5years'</span><span class="p">,</span> <span class="s">'high'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="s">'medium'</span><span class="p">,</span> <span class="s">'IT'</span><span class="p">,</span> <span class="s">'RandD'</span><span class="p">,</span>
+       <span class="s">'accounting'</span><span class="p">,</span> <span class="s">'hr'</span><span class="p">,</span> <span class="s">'management'</span><span class="p">,</span> <span class="s">'marketing'</span><span class="p">,</span> <span class="s">'product_mng'</span><span class="p">,</span> <span class="s">'sales'</span><span class="p">,</span>
+       <span class="s">'support'</span><span class="p">,</span> <span class="s">'technical'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="모델-검증을-위하여-train-set--test-set-나누기">모델 검증을 위하여 Train Set / Test Set 나누기</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myTrain</span><span class="p">,</span> <span class="n">myTest</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">human</span><span class="p">,</span><span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">X_Train</span> <span class="o">=</span> <span class="n">myTrain</span><span class="p">[</span><span class="n">feature_human</span><span class="p">]</span>
+<span class="n">Y_Train</span> <span class="o">=</span> <span class="n">myTrain</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span>
+
+<span class="n">X_Test</span> <span class="o">=</span> <span class="n">myTest</span><span class="p">[</span><span class="n">feature_human</span><span class="p">]</span>
+<span class="n">Y_Test</span> <span class="o">=</span> <span class="n">myTest</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<hr />
+<h2 id="model-1-logistic-regression">Model 1. Logistic Regression</h2>
+
+<hr />
+<h4 id="scikit-learn을-활용한-로지스틱-분석">Scikit Learn을 활용한 로지스틱 분석</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">logreg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1e5</span><span class="p">)</span>
+<span class="n">logreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_Train</span><span class="p">,</span> <span class="n">Y_Train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LogisticRegression(C=100000.0, class_weight=None, dual=False,
+          fit_intercept=True, intercept_scaling=1, max_iter=100,
+          multi_class='ovr', n_jobs=1, penalty='l2', random_state=None,
+          solver='liblinear', tol=0.0001, verbose=0, warm_start=False)
+</code></pre></div></div>
+
+<p>미리 빼놓은 10%의 Test Set에 대한 정확도</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">logreg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_Test</span><span class="p">,</span><span class="n">Y_Test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.79400000000000004
+</code></pre></div></div>
+
+<p>Cross Validation</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Logit_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">logreg</span><span class="p">,</span>
+                              <span class="n">X_Test</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">(),</span>
+                              <span class="n">Y_Test</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">(),</span>
+                              <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">Logit_score</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.78799591847316819
+</code></pre></div></div>
+
+<hr />
+<h4 id="statsmodel을-활용한-로지스틱-분석">Statsmodel을 활용한 로지스틱 분석</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># logistic regression</span>
+<span class="n">logit</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">Y_Train</span><span class="p">,</span> <span class="n">X_Train</span><span class="p">)</span> <span class="c"># Survived는 목적 변수</span>
+
+<span class="c"># fit the model</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">logit</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c"># result.params # 분석결과 출력</span>
+<span class="c"># odds rate</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Optimization terminated successfully.
+         Current function value: 0.429357
+         Iterations 7
+satisfaction_level       0.015943
+last_evaluation          2.112190
+number_project           0.728021
+average_montly_hours     1.004419
+time_spend_company       1.317232
+Work_accident            0.213670
+promotion_last_5years    0.251191
+high                     0.242803
+low                      1.553492
+medium                   0.912031
+IT                       0.820945
+RandD                    0.530398
+accounting               0.984193
+hr                       1.234437
+management               0.635344
+marketing                1.001736
+product_mng              0.879852
+sales                    0.993661
+support                  1.083700
+technical                1.078422
+dtype: float64
+</code></pre></div></div>
+
+<hr />
+<h2 id="model-2-decision-tree-classifier">Model 2. Decision Tree Classifier</h2>
+<hr />
+
+<h4 id="scikit-learn을-활용한-의사결정나무-만들기">Scikit learn을 활용한 의사결정나무 만들기</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DT_model</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">min_samples_leaf</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">DT_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_Train</span><span class="p">,</span> <span class="n">Y_Train</span><span class="p">)</span>
+<span class="n">DT</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">DT_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_Test</span><span class="p">))</span>
+<span class="n">DT</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y_Test</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[</span><span class="s">'left'</span><span class="p">]</span>
+<span class="n">DT</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best')
+</code></pre></div></div>
+
+<h4 id="모델-검증">모델 검증</h4>
+
+<p>전체 데이터셋에 대한 정확도</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">correct_num</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">DT</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">temp</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="n">temp</span><span class="p">:</span> <span class="n">correct_num</span><span class="o">+=</span><span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">correct_num</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">myTest</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.97
+</code></pre></div></div>
+
+<p>Cross Validation Score 확인</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DT_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">DT_model</span><span class="p">,</span><span class="n">X_Test</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">(),</span><span class="n">Y_Test</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">(),</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">DT_score</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.95535071130419946
+</code></pre></div></div>
+
+<hr />
+<h2 id="model-3-randomforest-classifier">Model 3. RandomForest Classifier</h2>
+<hr />
+
+<h4 id="scikit-learn에서-randomforest-classifier-불러오기">Scikit learn에서 RandomForest Classifier 불러오기</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">"display.max_columns"</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>분석에 사용할 X feature들 선정</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">feature_human</span> <span class="o">=</span><span class="p">[</span><span class="s">'satisfaction_level'</span><span class="p">,</span> <span class="s">'last_evaluation'</span><span class="p">,</span> <span class="s">'number_project'</span><span class="p">,</span>
+       <span class="s">'average_montly_hours'</span><span class="p">,</span> <span class="s">'time_spend_company'</span><span class="p">,</span> <span class="s">'Work_accident'</span><span class="p">,</span>
+       <span class="s">'promotion_last_5years'</span><span class="p">,</span> <span class="s">'high'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="s">'medium'</span><span class="p">,</span> <span class="s">'IT'</span><span class="p">,</span> <span class="s">'RandD'</span><span class="p">,</span>
+       <span class="s">'accounting'</span><span class="p">,</span> <span class="s">'hr'</span><span class="p">,</span> <span class="s">'management'</span><span class="p">,</span> <span class="s">'marketing'</span><span class="p">,</span> <span class="s">'product_mng'</span><span class="p">,</span> <span class="s">'sales'</span><span class="p">,</span>
+       <span class="s">'support'</span><span class="p">,</span> <span class="s">'technical'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="하이퍼파라미터-최적화">하이퍼파라미터 최적화</h4>
+<ul>
+  <li>반복문을 이용해 최적의 모델 찾기</li>
+  <li>while문을 돌리며 지정된 횟수만큼 모델의 성능을 update</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RFTest_size</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"RandomForestClasifier Start."</span><span class="p">)</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_validate</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_validate</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_Train</span><span class="p">,</span><span class="n">Y_Train</span><span class="p">,</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">RFTest_size</span><span class="p">,</span>
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">39</span><span class="p">,</span><span class="n">stratify</span><span class="o">=</span> <span class="n">Y_Train</span><span class="p">)</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c">#my_model = RandomForestClassifier(n_estimators = 1000, criterion = "gini",min_samples_split = 5, min_samples_leaf = 5, warm_start = True)</span>
+
+<span class="n">RF_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">max_features</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">RF_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">RF_probs</span> <span class="o">=</span> <span class="n">RF_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x_validate</span><span class="p">)</span>
+<span class="n">RF_logloss</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_validate</span><span class="p">,</span> <span class="n">RF_probs</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">": "</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">RF_logloss</span><span class="p">))</span>
+
+<span class="k">while</span><span class="p">(</span><span class="bp">True</span><span class="p">):</span>
+    <span class="c">#temp_model_cat = RandomForestClassifier(n_estimators = 1000, criterion = "gini",min_samples_split = 5, min_samples_leaf = 5, warm_start = True)</span>
+    <span class="n">temp_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">max_features</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">temp_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">temp_probs</span> <span class="o">=</span> <span class="n">temp_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x_validate</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">RF_logloss</span> <span class="o">&gt;</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_validate</span><span class="p">,</span> <span class="n">temp_probs</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">RF_model</span> <span class="o">=</span> <span class="n">temp_model</span>
+        <span class="n">RF_logloss</span> <span class="o">=</span> <span class="n">log_loss</span><span class="p">(</span><span class="n">y_validate</span><span class="p">,</span> <span class="n">temp_probs</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">": "</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">RF_logloss</span><span class="p">))</span>
+    <span class="c"># 종료조건    </span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">break</span>    
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Complete."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RandomForestClasifier Start.
+0: 0.0556763920555
+1: 0.0556297446114
+2: 0.0547819268539
+3: 0.0547341809308
+4: 0.0546790442451
+Complete.
+</code></pre></div></div>
+
+<h4 id="결과-분석--중요한-변수가-뭔지-알아보자">결과 분석 : 중요한 변수가 뭔지 알아보자</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fi</span> <span class="o">=</span> <span class="n">RF_model</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="c"># make importances relative to max importance</span>
+<span class="n">fi</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">fi</span> <span class="o">/</span> <span class="n">fi</span><span class="o">.</span><span class="nb">max</span><span class="p">())</span>
+<span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">fi</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sorted_idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">fi</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s">'center'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Relative Importance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Variable Importance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/170720-HR-Analysis/output_43_0.png" alt="png" /></p>
+
+<h4 id="모델-검증-1">모델 검증</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RF_result</span> <span class="o">=</span> <span class="n">RF_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_Test</span><span class="p">)</span>
+<span class="n">RF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">RF_result</span><span class="p">)</span>
+<span class="n">RF</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y_Test</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[</span><span class="s">'left'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>전체 Data에 대한 정확도</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RF_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_Test</span><span class="p">,</span><span class="n">Y_Test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.98933333333333329
+</code></pre></div></div>
+
+<p>Cross validation 정확도</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RF_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">RF_model</span><span class="p">,</span> <span class="n">X_Test</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">(),</span><span class="n">Y_Test</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">(),</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"RandomForest Results: </span><span class="si">%.2</span><span class="s">f</span><span class="si">%% </span><span class="s">(</span><span class="si">%.2</span><span class="s">f</span><span class="si">%%</span><span class="s">)"</span> <span class="o">%</span> <span class="p">(</span><span class="n">RF_score</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">RF_score</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RandomForest Results: 97.07% (1.60%)
+</code></pre></div></div>
+
+<hr />
+<h2 id="model-4-keras-binomial-classifier">Model 4. Keras Binomial Classifier</h2>
+
+<p>Neural Network의 python framework인 keras를 이용하여 binomial classification을 시도해보겠습니다.</p>
+
+<p>튜토리얼 단계로, 그냥 따라했을 뿐입니다.</p>
+
+<p>참고 : http://machinelearningmastery.com/binary-classification-tutorial-with-the-keras-deep-learning-library/</p>
+
+<hr />
+
+<h4 id="keras를-활용한-binomial-classification">Keras를 활용한 Binomial Classification</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">keras.wrappers.scikit_learn</span> <span class="kn">import</span> <span class="n">KerasClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using TensorFlow backend.
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">_X</span> <span class="o">=</span> <span class="n">X_Train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">_Y</span> <span class="o">=</span> <span class="n">Y_Train</span><span class="o">.</span><span class="n">values</span>
+<span class="n">encoder</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">_Y</span><span class="p">)</span>
+<span class="n">encoded_Y</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">_Y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_baseline</span><span class="p">():</span>
+    <span class="c"># create model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s">'normal'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s">'normal'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">))</span>
+    <span class="c"># Compile model</span>
+    <span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">'binary_crossentropy'</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s">'adam'</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'accuracy'</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></div>
+
+<h4 id="모델-검증-2">모델 검증</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">estimator</span> <span class="o">=</span> <span class="n">KerasClassifier</span><span class="p">(</span><span class="n">build_fn</span><span class="o">=</span><span class="n">create_baseline</span><span class="p">,</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">_X</span><span class="p">,</span> <span class="n">encoded_Y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"KerasClassifier Results: </span><span class="si">%.2</span><span class="s">f</span><span class="si">%% </span><span class="s">(</span><span class="si">%.2</span><span class="s">f</span><span class="si">%%</span><span class="s">)"</span> <span class="o">%</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/sungnampark/anaconda/lib/python3.6/site-packages/ipykernel_launcher.py:4: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(20, input_dim=20, activation="relu", kernel_initializer="normal")`
+  after removing the cwd from sys.path.
+/Users/sungnampark/anaconda/lib/python3.6/site-packages/ipykernel_launcher.py:5: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(1, activation="sigmoid", kernel_initializer="normal")`
+  """
+
+
+KerasClassifier Results: 86.92% (1.50%)
+</code></pre></div></div>
+
+<hr />
+<h2 id="발표-자료">발표 자료</h2>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/mCujiUO8H70VPM" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen=""> </iframe>
+<div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/SungnamPark2/kaggle-human-resource-data-analysis" title="[Kaggle] Human Resource Data Analysis" target="_blank">[Kaggle] Human Resource Data Analysis</a> </strong> from <strong><a target="_blank" href="//www.slideshare.net/SungnamPark2">Sungnam Park</a></strong> </div>
+
+<hr />
+
+        </div>
+
+        
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/docs/blog/starting-my-blog/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> 15분만에 깃허브 블로그 만들기
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/docs/blog/First-GAN/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        [GAN] First GAN
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/angrypark"><i class="fab fa-github-alt fa-2x" title="Github"></i></a><a class="social-icon" href="https://facebook.com/sungnam1108"><i class="fab fa-facebook-square fa-2x" title="Facebook"></i></a><a class="social-icon" href="https://www.linkedin.com/in/angrypark/"><i class="fab fa-linkedin fa-2x" title="Linkedin"></i></a><a class="social-icon" href="mailto:sungnam1108@naver.com"><i class="fa fa-envelope fa-2x" title="Email"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2018 angrypark. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/mmistakes/so-simple-theme" rel="nofollow">So Simple</a>.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  </body>
+
+</html>
