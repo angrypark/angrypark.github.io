@@ -19,10 +19,10 @@ tag:
 ## 기존 Retrieval Based Chatbots의 문제
 기존에 알려진 문제(답변이 제한적이다, 답변 후보군에 따라 성능이 좌우된다) 이외에도 모델을 학습시키는 데에 있어서 발생하는 문제가 있습니다. 정상적인 대화를 어느정도 가지고 있을 때 이를 가지고 데이터를 만들 때, 보통 정상적인 대화의 각각의 pair를 1(positive), 나머지는 random negative sampling을 통해 0(negative)로 정의내린 다음 데이터를 만들지만, 이는 다음과 같은 문제를 가지고 있습니다.
 
-#### Label Imbalance
+#### - Label Imbalance
 이론상으로 random negative는 positive data에 주어진 pair 수가 n일 때 n(n-1)개만큼 만들 수 있지만 잘 학습하려면 지나치게 많은 negative를 넣으면 안되고, 결국 데이터의 수는 positive pair에 절대적으로 비례하는데 이는 비쌉니다.
 
-#### Weak negative vs Hard Negative
+#### - Weak negative vs Hard Negative
 각각의 negative는 보통 학습할 때 batch에서 1~4개씩 뽑거나 전체 데이터에서 1~4개씩 뽑는데, 무작위로 뽑기 때문에 해당 negative가 모델이 학습하기 쉬운 negative일 확률도 있고, 반대로 random하게 뽑았는데 해당 query에 말이되는 reply(positive)이지만 negative로 잘못 학습하는 경우도 있습니다. 더 큰 문제는 이런 다양한 경우를 모두 같은 0으로 학습하기 때문에 제대로 학습하지 못하거나, 학습되더라도 뻔한 수준에 머무를 가능성이 있다는 것입니다.
 
 ## Weak Annotator
@@ -31,15 +31,16 @@ tag:
 $$
 \sum_{i=1}^{N}\sum_{j=1}^{n}[r_{i, j}\log(\mathcal{M}(x_i, y_{i, j})) + (1-r_{i, j})\log{1-\mathcal{M}(x_i, y_{i, j})}]
 $$
+
 이를 수식으로 나타내면 기존 방식은 positive pair의 matching score가 높을 수록 좋고, negative pair의 matching score가 낮을수록 좋게끔 선정한 것에 비해
 
 $$
 arg\min\sum_{i=1}^{N}\sum_{j=1}^{n}\max(0, \mathcal{M}(x_i, y_{i, j})-\mathcal{M}(x_i, y_{i, 1}) + s_{i, j}')
 $$
 
-여기서 제안한 방식은 negative일 경우 negative의 matching score에서 positive의 matching score를 빼고 거기에 weak annotator의 예측값을 더한게 작을수록 좋게끔 하는 것입니다. positive일 경우에는 $\max(0, s_{i, j}')$로 상수가 됩니다. 이 수식에서 특징은
+여기서 제안한 방식은 negative일 경우 negative의 matching score에서 positive의 matching score를 빼고 거기에 weak annotator의 예측값을 더한게 작을수록 좋게끔 하는 것입니다. positive일 경우에는 $$\max(0, s_{i, j}')$$로 상수가 됩니다. 이 수식에서 특징은
 - 0보다 작을 경우 0으로 clipping
-- $x_i$에 bias가 생기지 않도록 normalize ($s_{i, j}' = \max(0, \frac{s_{i, j}}{s_{i, 1}})$)
+- $$x_i$$에 bias가 생기지 않도록 normalize ($$s_{i, j}' = \max(0, \frac{s_{i, j}}{s_{i, 1}})$$)
 
 입니다.
 
