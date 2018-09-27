@@ -1,6 +1,6 @@
 # main text of home
 name: angrypark
-bio: 데이터 분석을 공부하고 있는 박성남입니다.
+bio: 머신러닝을 공부하고 있는 박성남입니다.
 
 # twitter summary info
 description: angrypark
@@ -17,7 +17,6 @@ resume-external: false
 resume-url: https://google.com/?q=my+resume
 
 url: https://angrypark.github.io
-# your url: http://USERNAME.github.io
 
 permalink: /:title/
 # To enable google analytics, supply your token below
@@ -57,23 +56,6 @@ authors:
         external-image: false
         picture: assets/images/profile.jpg
         facebook: sungnam1108
-    johndoe:
-        name: 박성남
-        bio: 데이터 분석을 공부하는 박성남입니다.
-        external-image: false
-        picture: assets/images/profile.jpg
-        twitter:
-    byunggyu:
-        name: 강병규
-        bio: YBIGTA Data Science Team
-        external-image: false
-        picture: assets/images/byunggyu.jpg
-    jamesfoster:
-        name: 박성남
-        bio: 데이터 분석을 공부하는 박성남입니다.
-        external-image: false
-        picture: assets/images/profile.jpg
-        twitter:
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
