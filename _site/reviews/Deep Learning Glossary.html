@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>[WildML] Glossary</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/angrypark/.atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="wildml-glossary">WildML Glossary</h1>
+
+<p>18-03-13 박성남</p>
+<p>WildML의 <a href="http://www.wildml.com/deep-learning-glossary/">Deep Learning Glossary</a> 정리해보았습니다.</p>
+<hr>
+<ul>
+<li>
+<p>Activation function</p>
+<p>딥러닝의 가장 큰 장점인 <strong>복잡한 decision boundary</strong>를 적용하기위해, 비선형적인 activation function을 layer에 추가합니다. 보통 <code>sigmoid</code>, <code>tanh</code>, <code>ReLU</code>와 이들의 변형을 사용합니다.</p>
+</li>
+<li>
+<p>Adadelta</p>
+<p>Gradient descent을 기반으로 만든 알고리즘으로 파라미터마다 learning rate를 최적화합니다. Adagrad를 개선하기 위해 만들어졌으며, hyperparameter에 더 민감합니다. Adadelta는 rmsprop과 유사하며 vanilla SGD 대신 사용되기도 합니다.</p>
+</li>
+<li>
+<p>Adagrad</p>
+<p>Adagrad는 adaptive learning rate algorithm 방법들 중 하나로 시간에 따라 바뀌는 griadients의 squared 값을 추적하고, 동시에 learning rate를 최적화시킵니다. Vanilla SGD 대신 쓰이기도 하며, 특히 sparse한 데이터에 좋습니다.</p>
+</li>
+<li>
+<p>Adam</p>
+<p>Adam도 optimizing algorithm 중 하나로, rmsprop과 유사하지만 update를 첫번째와 두번째 순간의 gradient의 running average로 추정합니다. 또 bias correction term도 포함되어 있습니다.</p>
+</li>
+<li>
+<p>Affine layer</p>
+<p><strong>Fully-connected layer</strong>와 같은 말입니다. 그 전 레이어의 모든 뉴런이 현재 레이어의 모든 뉴런과 연결되어 있다는 뜻입니다. 보통 output의 final prediction전에 추가됩니다.</p>
+</li>
+<li>
+<p>Attention mechanism</p>
+<p><strong>Human visual attention</strong>에서 영감을 받았으며, 어떤 이미지에서 특정 부분에 더 집중하게 됩니다. Language processing과 image recognition 구조에 모두 적용됩니다. 결국 예측할 때, 어느 부분에 집중하여 예측할 지를 결정하는 것입니다.</p>
+</li>
+<li>
+<p>Alexnet</p>
+<p>CNN architecture의 일종으로 ILSVRC 2012에서 우승하였으먀 5개의 convolution layer와 max-pooling을 추가하였고 3개의 affine layer가 추가되어 finally 1000 way softmax가 추가되어있는 형태입니다.</p>
+</li>
+<li>
+<p>Autoencoder</p>
+<p>Autoencoder는 목표가 input을 그대로 예측하는 것입니다. <strong>Bottleneck</strong> 구조를 띄고 있으며, 그를 위해서 일단 저차원으로 represent하고 이를 다시 복원합니다. 따라서 PCA와 같은 다른 차원축소 기법들과 유사하지만, 비선형적인 환경으로 인해 더 복잡한 mapping이 가능합니다. 변형 기법으로 Denoising Autoencoders, Variational Autoencoders, Sequence Autoencoders 등이 있습니다.</p>
+</li>
+<li>
+<p>Average-pooling</p>
+<p>Pooling 기법 중 하나로 CNN for image recognition에 쓰입니다. 정해진 크기의 window(filter)를 이동시키면서 그 평균을 구합니다. 뭐, input을 저차원으로 압축시킨다고 보면 됩니다.</p>
+</li>
+<li>
+<p>Backpropagation through time</p>
+<p>역적판 기법 중 하나로 RNN에 쓰입니다. 표준의 역전파 방식을 RNN에 적용시켰다고 보면 되고, layer가 시간을 의미하기 때문에, 시간을 관통하는 역전파라고 불리는 것입니다. 몇백개의 input이라고 한다면, BPTT가 computational cost를 줄이기 위해 사용됩니다.</p>
+</li>
+<li>
+<p>Batch normalization</p>
+<p>작은 batch마다의 layer input들을 normalize하는 방법입니다. 학습을 더 빠르게 하고, learning rate를 더 빠르게 최적화하며, regularizer 역할도 해줍니다. CNN에는 좋지만 RNN에는 안좋다고 합니다.</p>
+</li>
+<li>
+<p>Bidirectional RNN</p>
+<p>두 개의 RNN을 반대 방향을 연결한 네트워크 구조입니다. Foward RNN은 input sequence를 순방향으로 읽고, Backward RNN은 역방향으로 읽습니다. NLP에 자주 쓰이고, 그 단어 전후의 문맥을 파악하고자 할때 쓰입니다.</p>
+</li>
+<li>
+<p>Categorical cross-entropy loss</p>
+<p><strong>Negative log likelihood</strong>와 같은 말입니다. 분류 문제에서 유명하고, 두 개의 확률분포에서의 유사성을 측정합니다. <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>=</mo><mo>−</mo><mo>∑</mo><mo>(</mo><mi>y</mi><mo>∗</mo><mi>log</mi><mo>⁡</mo><mo>(</mo><msub><mi>y</mi><mrow><mi>p</mi><mi>r</mi><mi>e</mi><mi>d</mi><mi>i</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow></msub><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">L=-\sum(y*\log(y_{prediction}))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="base"><span class="mord mathit">L</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord">−</span><span class="mord rule" style="margin-right:0.16666666666666666em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">p</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mord mathit mtight">e</span><span class="mord mathit mtight">d</span><span class="mord mathit mtight">i</span><span class="mord mathit mtight">c</span><span class="mord mathit mtight">t</span><span class="mord mathit mtight">i</span><span class="mord mathit mtight">o</span><span class="mord mathit mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
+</li>
+<li>
+<p>Channel</p>
+<p>input data의 channel은 여러 개일 수 있습니다. 이건 뭐..</p>
+</li>
+<li>
+<p>Deep belief network</p>
+<p>DBN은 probabilistic graphic model 중 하나로 data의 hierachical representation을 비지도학습으로 배웁니다.</p>
+</li>
+<li>
+<p>Deep dream</p>
+<p>CNN에서 포착된 knowledge를 시각화하는 기법으로, 기존의 이미지를 변형하거나 새로운 그림을 만들면서 이를 꿈같은 표현으로 생성합니다..??</p>
+</li>
+<li>
+<p>Dropout</p>
+<p>regularization technique의 일종으로 overfitting을 방지합니다. 임의로 가지치기를 한다고 생각하시면 됩니다.</p>
+</li>
+<li>
+<p>Embedding</p>
+<p>input을 vector로 표현하는 방법입니다. word2vec같이 explicit하게 배우거나, sentiment analysis 같이 지도 학습을 통해 배워지기도 합니다. pre-trained embedding에서 시작되어 그 과제에 맞게 fine-tuning되기도 합니다.</p>
+</li>
+<li>
+<p>Exploding gradient problem</p>
+<p>Vanishing Gradient Problem의 반대의 의미입니다. Gradient clipping을 통해 이를 조절합니다.</p>
+</li>
+<li>
+<p>Fine-tuning</p>
+<p>다른 과제 또는 환경에서 학습된 네트워크를 원하는 과제에 맞게 다시 최적화하는 방법입니다.</p>
+</li>
+<li>
+<p>Gradient clipping</p>
+<p>exploding gradients를 조절하기 위해 사용하는 방법으로, 특히 RNN에서 자주 사용됩니다. 대표적인 방법으로는 L2 norm이 threshold를 넘을 때 normalize하는 방법입니다.<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi><msub><mi>s</mi><mrow><mi>n</mi><mi>e</mi><mi>w</mi></mrow></msub><mo>=</mo><mfrac><mrow><mi>G</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi><msub><mi>s</mi><mrow><mi>o</mi><mi>l</mi><mi>d</mi></mrow></msub><mo>∗</mo><mi>t</mi><mi>h</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>h</mi><mi>o</mi><mi>l</mi><mi>d</mi></mrow><mrow><mi>l</mi><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">Gradients_{new} = \frac{Gradients_{old} * threshold}{l2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.37144em;"></span><span class="strut bottom" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="base"><span class="mord mathit">G</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">a</span><span class="mord mathit">d</span><span class="mord mathit">i</span><span class="mord mathit">e</span><span class="mord mathit">n</span><span class="mord mathit">t</span><span class="mord"><span class="mord mathit">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="mord mathit mtight">e</span><span class="mord mathit mtight" style="margin-right:0.02691em;">w</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mord rule" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord">2</span></span></span><span style="top:-3.15em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.2em;"><svg width="400em" height="0.2em" viewBox="0 0 400000 200" preserveAspectRatio="xMinYMin slice"><path d="M0 80H400000 v40H0z M0 80H400000 v40H0z"></path></svg></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathit">G</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">a</span><span class="mord mathit">d</span><span class="mord mathit">i</span><span class="mord mathit">e</span><span class="mord mathit">n</span><span class="mord mathit">t</span><span class="mord"><span class="mord mathit">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">o</span><span class="mord mathit mtight" style="margin-right:0.01968em;">l</span><span class="mord mathit mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">t</span><span class="mord mathit">h</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">e</span><span class="mord mathit">s</span><span class="mord mathit">h</span><span class="mord mathit">o</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+</li>
+<li>
+<p>GloVe</p>
+<p>embedding 기법 중 하나로, co-occurence matrix의 통계량을 이용한다는 특징이 있습니다.</p>
+</li>
+<li>
+<p>GoogleNet</p>
+<p>ILSVRC 2014에서 우승한 CNN architecture입니다. Inception module을 사용하여 네트워크의 computing resource를 향상시켰습니다.</p>
+</li>
+<li>
+<p>GRU</p>
+<p>Gated Recurrent Unit의 약자입니다. LSTM의 간단 버전이고 파라미터 수가 더 적습니다. LSTM과 마찬가지로 RNN에서 gating mechanism을 써서 long-range dependency를 조절하고 vanishing gradient problem을 해결합니다. GRU도 reset과 update gate가 있어서 old memory중 어떤 부분을 보존하거나 update할 지를 결정합니다.</p>
+</li>
+<li>
+<p>Highway Layer</p>
+<p>gating mechanism을 전체 layer에 적용시킨 모델입니다. 아주 깊은 모델 구조에서 input의 어떤 부분을 그대로 넘기고, 어떤 부분을 변형해서 넘길지를 결정합니다.<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>×</mo><mi>h</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>T</mi><mo>)</mo><mo>×</mo><mi>h</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">T\times h(x)+(1-T)\times h(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">h</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">h</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span></span></span></span></span></p>
+</li>
+<li>
+<p>ICML</p>
+<p>International Conference for Machine Learning</p>
+</li>
+<li>
+<p>ILSVRC</p>
+<p>ImageNet Large Scale Visual Recognition Challenge</p>
+</li>
+<li>
+<p>Inception module</p>
+<p>CNN architecure에서 더 효율적인 계산과 더 깊은 네트워크를 위해 쓰이는 방식으로 차원 축소와 stacked 1x1 convolutions를 사용합니다.</p>
+</li>
+<li>
+<p>LSTM</p>
+<p>vanishing gradient problem을 해결하기 위해서 발명되었으며 memory gating mechanism을 사용합니다.</p>
+</li>
+<li>
+<p>Max-pooling</p>
+<p>CNN에서 사용되는 pooling 기법들 중 하나입니다. 이름만 봐도 뭔지 알겠죠?</p>
+</li>
+<li>
+<p>Momentum</p>
+<p>Gradient descent algorithm의 확장으로, parameter 갱신을 가속화하거나 감속합니다. Gradient descent를 업데이트할 때, momentum term을 넣으면 더 잘 수렴합니다.</p>
+</li>
+<li>
+<p>Neural machine translation</p>
+<p>언어간 번역을 의미합니다. end-to-end bilingual corpora를 통해 학습되기도 하며, 기본적으로는 encoder와 decoder rnn을 사용합니다.</p>
+</li>
+<li>
+<p>Neural turing machine</p>
+<p>simple algorithm을 neural network로 구현하는 겁니다.</p>
+</li>
+<li>
+<p>Noise-contrastive estimation</p>
+<p>large output vocabulary를 가진 분류 모델을 학습시킬 때 쓰일 수 있는 sampling loss입니다. 모든 가능한 경우의 수에 대해 softmax를 쓰기는 어렵습니다. NCE를 사용하면, 문제를 binary classificaion problem으로 제한할 수 있습니다.</p>
+</li>
+<li>
+<p>Restricted boltzmann machine</p>
+<p>probabilistic한 graphic model의 일종으로 stochastic artifical neural network이다. 비지도 학습으로 데이터를 vector로 바꿉니다. Contrasive divergence를 사용하여 더 효율적으로 학습합니다.</p>
+</li>
+<li>
+<p>Recursive nerual network</p>
+<p>RNN을 트리 구조에 적용한 모델입니다. 이미 잘 train된 rnn에 사용되곤 합니다. parsing tree in NLP</p>
+</li>
+<li>
+<p>ResNet</p>
+<p>ILSVRC 2015에 우승한 CNN architecture입니다. layer를 건너뛰어서 연결하는 residual mapping을 이용하였습니다.</p>
+</li>
+<li>
+<p>RMSProp</p>
+<p>gradient-based optimization algorithm 기법 중 하나입니다. adagrad와 유사하지만, decay term을 추가함으로서 adagrad의 learning rate의 급격한 감소를 방지합니다.</p>
+</li>
+<li>
+<p>Seq2Seq</p>
+<p>Sequence-to-sequence model</p>
+</li>
+<li>
+<p>SGD</p>
+<p>Stochastic Gradient Descent입니다. 보통 minibatch에서 사용하곤 합니다.</p>
+</li>
+<li>
+<p>Vanishing gradient problem</p>
+<p>너무 깊은 neural network에서 발생하는 문제 중 하나입니다. 역전파 과정에서 작은 gradient가 곱해져서 없어지는 경향을 말합니다. 이를 해결하기위해 ReLU를 쓰거나, LSTM같은 architecture를 쓰거나 합니다. 반대의 경우엔 exploding gradient problem이 발생합니다.</p>
+</li>
+</ul>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#wildml-glossary">WildML Glossary</a></li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    </body>
+    
+    
+    
+    
+    
+    <script>
+(function bindTaskListEvent() {
+  var taskListItemCheckboxes = document.body.getElementsByClassName('task-list-item-checkbox')
+  for (var i = 0; i < taskListItemCheckboxes.length; i++) {
+    var checkbox = taskListItemCheckboxes[i]
+    var li = checkbox.parentElement
+    if (li.tagName !== 'LI') li = li.parentElement
+    if (li.tagName === 'LI') {
+      li.classList.add('task-list-item')
+    }
+  }
+}())    
+</script>
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  </html>

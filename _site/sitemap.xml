@@ -1,139 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://angrypark.github.io/docs/blog/starting-my-blog/</loc>
-<lastmod>2017-07-20T02:23:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/project/Human-Resource-Analysis/</loc>
-<lastmod>2017-07-20T14:52:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/First-GAN/</loc>
-<lastmod>2017-07-21T02:23:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/GAN-tutorial-1/</loc>
-<lastmod>2017-07-23T15:10:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/project/TripAdvisor-comments-analysis/</loc>
-<lastmod>2017-07-26T15:10:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/Embed-Plotly/</loc>
-<lastmod>2017-07-27T14:01:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/project/Movie-Recommendation/</loc>
-<lastmod>2017-08-01T20:27:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/project/Fast-Neural-Transfer/</loc>
-<lastmod>2017-08-01T20:27:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/DCGAN-paper-reading/</loc>
-<lastmod>2017-08-03T20:30:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/DiscoGAN-paper-reading/</loc>
-<lastmod>2017-09-09T20:30:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/GAN-tutorial-2/</loc>
-<lastmod>2017-11-18T15:10:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/ISL-study/</loc>
-<lastmod>2018-01-17T18:47:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/Week-2/</loc>
-<lastmod>2018-01-20T00:00:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/ISL-Ch07/</loc>
-<lastmod>2018-02-14T18:00:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/ISL-Ch08/</loc>
-<lastmod>2018-02-14T18:00:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/blog/improving-deep-neural-networks/</loc>
-<lastmod>2018-05-23T18:00:00+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/about/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/categories/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/categories/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/categories/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/categories/edge-case/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/categories/edge-case/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/example/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/docs/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/tags/markup/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/tags/markup/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/posts/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/posts/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/posts/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/recipes/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/recipes/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/recipes/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/tags/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/tags/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/tags/</loc>
-</url>
-<url>
-<loc>https://angrypark.github.io/theme-setup/</loc>
-<lastmod>2018-02-03T04:12:02+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/googled0120570a1daa378.html</loc>
-<lastmod>2017-09-27T14:56:55+09:00</lastmod>
-</url>
-<url>
-<loc>https://angrypark.github.io/naver4c558980ea0b8a90711980dac410dc51.html</loc>
-<lastmod>2017-09-27T15:05:08+09:00</lastmod>
-</url>
+  
+    <url>
+      <loc>http://localhost:4000/improving-deep-neural-networks/</loc>
+      
+        <lastmod>2018-05-23T18:00:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/ISL-Ch08/</loc>
+      
+        <lastmod>2018-02-14T18:00:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/ISL-Ch07/</loc>
+      
+        <lastmod>2018-02-14T18:00:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/Week-2/</loc>
+      
+        <lastmod>2018-01-20T00:00:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/ISL-study/</loc>
+      
+        <lastmod>2018-01-17T18:47:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/GAN-tutorial-2/</loc>
+      
+        <lastmod>2017-11-18T15:10:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/DiscoGAN-paper-reading/</loc>
+      
+        <lastmod>2017-09-09T20:30:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/DCGAN-paper-reading/</loc>
+      
+        <lastmod>2017-08-03T20:30:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/Fast-Neural-Transfer/</loc>
+      
+        <lastmod>2017-08-01T20:27:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/Movie-Recommendation/</loc>
+      
+        <lastmod>2017-08-01T20:27:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/Embed-Plotly/</loc>
+      
+        <lastmod>2017-07-27T14:01:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/TripAdvisor-comments-analysis/</loc>
+      
+        <lastmod>2017-07-26T15:10:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/GAN-tutorial-1/</loc>
+      
+        <lastmod>2017-07-23T15:10:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/First-GAN/</loc>
+      
+        <lastmod>2017-07-21T02:23:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/Human-Resource-Analysis/</loc>
+      
+        <lastmod>2017-07-20T14:52:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/starting-my-blog/</loc>
+      
+        <lastmod>2017-07-20T02:23:00+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
 </urlset>
