@@ -1,25 +1,21 @@
 ---
-title: "[GAN] 1D Gaussian Distribution Generation"
-layout: post
+title: "1D Gaussian Distribution Generation using vanilla GAN"
+excerpt: GAN으로 1D Gaussian Distribution Generate 하기
 date: 2017-07-23 15:10
-image: /assets/images/170721-first-gan/background.png
-headerImage: false
+layout: post
+category:
+- Generative Models
 tag:
-- gan
-- pytorch
-- deep learning
-- ybigta
-category: blog
-author: angrypark
-description: GAN으로 1D Gaussian Distribution Generate 하기
-# jemoji: '<img class="emoji" title=":ramen:" alt=":ramen:" src="https://assets.github.com/images/icons/emoji/unicode/1f35c.png" height="20" width="20" align="absmiddle">'
+- GAN
+- Implementation
+- PyTorch
 ---
 
-<span style="color:#7C7877; font-family: 'Apple SD Gothic Neo'; font-weight:200">
+![image](/images/170721-first-gan/background.png)
 
 ## 요약
 
-연세대학교 빅데이터 학회 YBIGTA의 GAN팀에서 준비한 두번째 시간에는 GAN을 활용하여 1D Gaussian Distribution을 generate하는 튜토리얼을 살펴보았다.
+GAN을 활용하여 1D Gaussian Distribution을 generate하는 튜토리얼을 만들어보았다.
 
 **목차**
 
@@ -41,21 +37,17 @@ GAN에 대해 간단히 복습하자면, GAN(Generative Adversarial Nets)이란 
 NIPS2016에서 저자인 Ian Goodfellow가 발표한 내용에 따르면, GAN은 다음과 같은 상황에서 매우 뛰어난 성능을 보여준다.
 
 
-![Why GAN?](/assets/images/2017-07-23-GAN-tutorial-1/why-gan.png)
+![Why GAN?](/images/2017-07-23-GAN-tutorial-1/why-gan.png)
 
 
 가장 핵심은, GAN은 기존의 머신러닝 기법과 같이 원데이터의 분포에 대해 직접적으로 알아내고 분석한다기보다는, 원데이터와 최대한 비슷한 sample을 만들어내는 데에만 목표를 둔다는 점이다. 따라서 원데이터가 매우 복잡하고 고차원이거나, 결측치가 많거나, 원데이터가 무한히 많을 때 좋은 성능을 보여준다.
 
-더 자세한 내용은 저번 포스트([Link](https://angrypark.github.io/First-GAN/))를 참고하기 바란다.
+더 자세한 내용은 같은 팀원이 올린 포스트([First-GAN](https://kangbk0120.github.io/articles/2017-07/first-gan))를 참고하기 바란다.
 
 ---
 ## 1D Gaussian Distribution
 
-GAN 첫번째 튜토리얼로는 정규분포를 만든 다음에 이를 GAN을 활용해서 최대한 비슷하게 generate해보았다. 작업 환경은 다음과 같다.
-
-- Python : 3.6.1
-- Pytorch : 0.1.12
-- OS : MAC OSX
+GAN 첫번째 튜토리얼로는 정규분포를 만든 다음에 이를 GAN을 활용해서 최대한 비슷하게 generate해보았다.
 
 #### Why Pytorch?
 이 튜토리얼과 관련하여 TensorFlow, Keras, Pytorch로 구현한 모든 github 예제를 분석해보았는데, 처음엔 TensorFlow 코드를 보고 이를 Pytorch로 바꾸어볼려고 했지만, 둘 다 사용법이 미숙하니 시간상으로 도저히 안되겠다는 것을 느꼈다. 그래서 (*팀장님이 추천해주시기도 했고*) 코드가 비교적 간단한 pytorch로 보기로 했다. 이거 결정하는 데만 시간이 엄청 걸렸다..ㅠ
@@ -64,7 +56,7 @@ GAN 첫번째 튜토리얼로는 정규분포를 만든 다음에 이를 GAN을 
 ## Workflow
 코드의 workflow는 다음과 같다.
 
-![workflow](/assets/images/2017-07-23-GAN-tutorial-1/code-workflow.jpg)
+![workflow](/images/2017-07-23-GAN-tutorial-1/code-workflow.jpg)
 
 먼저 Generator의 입장에서 말하자면, 입력값은 0과 1사이의 임의의 값이고, 이를 노이즈를 줘서 fake sample을 만들어 Discriminator에게 보낸다. 후에, Discriminator의 반응에 따라 신경망을 최적화하는데, 즉 어떤 sample에 대해서는 1(real)이라 반응했다 / 어떤 sample은 0(fake)이라 반응했다 의 여부에 따라 Generator가 최적화되는 것이다. 인상깊은 점은 **Generator는 sample이 실제로 real sample인지 fake sample인지 모른다.** 다만 Discriminator가 어떻게 평가했는지의 여부만 보고 최적화하는 것이다.
 

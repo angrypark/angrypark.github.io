@@ -1,20 +1,16 @@
 ---
-title: "[ISL] Ch7. Moving Beyond Linearity"  
-layout: post  
-date: 2018-02-14 18:00  
-image: /assets/images/170720/background.jpeg  
-headerImage: false  
-tag:  
-- machine learning  
-- statistical learning  
-- ISL  
-category: blog  
-author: angrypark
+title: "Moving Beyond Linearity"
+excerpt: ISL의 7장을 읽고 정리했습니다.
+date: 2018-02-14
+layout: post
+category:
+- Book Review
+- ISL
+tag:
+- ISL
+- statistical machine learning
 
-description: YBIGTA에서 진행하는 ISL(Introduction to Statistical Learning) Chapter 7 정리입니다.
 ---
-
-<span style="color:#7C7877; font-family: 'Apple SD Gothic Neo'; font-weight:200">
 
 이번 시간에는 ISL(Introduction to Statistical Learning) 7장을 리뷰해보았습니다. 7장에서는 Moving Beyond Linearity, 선형성을 확장하고자 시도했던 여러 모델들을 배우는데요. 선형모델들의 단순 확장인 step function, polynomial regression 뿐만 아니라 splone, local regression, generalized additive model들도 다룹니다.
 
@@ -25,7 +21,7 @@ description: YBIGTA에서 진행하는 ISL(Introduction to Statistical Learning)
 - [7.4. Regression Splines](#74-regression-splines)  
 - [7.5. Smoothing Splines](#75-smoothing-splines)  
 - [7.6. Local Regression](#76-local-regression)
--	[7.7. Generalized Additive Models](#77-generalized-additive-models)
+- [7.7. Generalized Additive Models](#77-generalized-additive-models)
 
 ---
 
