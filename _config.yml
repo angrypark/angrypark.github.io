@@ -17,7 +17,7 @@
 remote_theme: mmistakes/so-simple-theme
 locale: en-US
 title: "angrypark"
-description: "머신러닝을 공부하는 박성남입니다."
+description: "Machine Learning & Deep Learning Blog"
 baseurl: # the subpath of your site, e.g. "/blog"
 url: https://angrypark.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 logo: /images/profile-icon.jpg # path of site logo, e.g. "/images/logo.png"
@@ -32,7 +32,7 @@ google_fonts:
     weights: "400,400i,700,700i"
 google_analytics: # Google Analytics id, e.g. "UA-NNNNNNNN-N"
 disqus:
-  shortname: # Disqus shortname, e.g. "my_disqus_shortname"
+  shortname: angrypark # Disqus shortname, e.g. "my_disqus_shortname"
 twitter:
   username: # site's Twitter username, e.g. "mmistakes"
 
