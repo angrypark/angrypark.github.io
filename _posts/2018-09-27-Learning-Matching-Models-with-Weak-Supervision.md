@@ -39,7 +39,7 @@ $$
 arg\min\sum_{i=1}^{N}\sum_{j=1}^{n}\max(0, \mathcal{M}(x_i, y_{i, j})-\mathcal{M}(x_i, y_{i, 1}) + s_{i, j}')
 $$
 
-여기서 제안한 방식은 negative일 경우 negative의 matching score(annotator가 예측한 값)에서 positive의 matching score(annotator가 예측한 값)을 빼고 거기에 weak annotator의 예측값을 더한게 작을수록 좋게끔 하는 것입니다. positive일 경우에는 $$\max(0, s_{i, j}')$$로 상수가 됩니다. 이 수식에서 특징은
+여기서 제안한 방식은 negative일 경우 negative의 matching score(모델이 예측한 값)에서 positive의 matching score(모델이 예측한 값)을 빼고 거기에 weak annotator의 예측값을 더한게 작을수록 좋게끔 하는 것입니다. positive일 경우에는 $$\max(0, s_{i, j}')$$로 상수가 됩니다. 이 수식에서 특징은
 - 0보다 작을 경우 0으로 clipping
 - $$x_i$$에 bias가 생기지 않도록 normalize ($$s_{i, j}' = \max(0, \frac{s_{i, j}}{s_{i, 1}})$$)
 
