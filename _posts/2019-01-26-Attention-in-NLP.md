@@ -25,7 +25,7 @@ Encoder-Decoder 구조에서 가장 중요한 부분은 input sequence를 어떻
 
 가장 기본적인 아이디어는 encode할 때는 각각의 단어를 vector로 만들고, 각각을 attention weight에 따라 weighted sum을 한 다음, 이를 활용하여 다음 단어가 무엇일 지를 선택하는 것입니다. 
 
-논문은 이 방식을 NMT에 사용하였는데요, bidirectional RNN을 encoder로 사용하고, $$i$​$번째 단어에 대해 모든 단어에 대한 encoder output을 합쳐서 context vector로 만드는데, 이 때 단순 sum이 아닌 weight $$\alpha_{ij}$​$ 를 곱해서 weighted sum을 한 것입니다(아래 첫번째 수식). 이 때 $i​$ 번째 단어에 대한 $$j$​$번째 단어의 attention weight는 아래 수식 처럼 $i​$ 번째 단어와 $$j$​$번째의 원래 encoder output끼리를 feedforward neural network(attention weight를 만드는 모델을 논문에서는 align 모델이라고 부릅니다)를 태워서 만듭니다(아래 두번째 수식).
+논문은 이 방식을 NMT에 사용하였는데요, bidirectional RNN을 encoder로 사용하고, $$i$​$번째 단어에 대해 모든 단어에 대한 encoder output을 합쳐서 context vector로 만드는데, 이 때 단순 sum이 아닌 weight $$\alpha_{ij}$​$ 를 곱해서 weighted sum을 한 것입니다(아래 첫번째 수식). 이 때 $$i$​$ 번째 단어에 대한 $$j$​$번째 단어의 attention weight는 아래 수식 처럼 $$i$​$ 번째 단어와 $$j$​$번째의 원래 encoder output끼리를 feedforward neural network(attention weight를 만드는 모델을 논문에서는 align 모델이라고 부릅니다)를 태워서 만듭니다(아래 두번째 수식).
 
 $$
 \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}
