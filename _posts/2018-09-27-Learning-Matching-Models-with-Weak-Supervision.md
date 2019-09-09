@@ -30,7 +30,7 @@ tag:
 이 문제를 해결하기 위해서 이 논문에서는 기존에 1/0으로 학습하는 방식이 아닌 weak annotator 모델로 예측한 예측값을 사용하여 학습합니다.
 
 $$
-\sum_{i=1}^{N}\sum_{j=1}^{n}[r_{i, j}\log(\mathcal{M}(x_i, y_{i, j})) + (1-r_{i, j})\log{1-\mathcal{M}(x_i, y_{i, j})}]
+\sum_{i=1}^{N}\sum_{j=1}^{n}[r_{i, j}\log(\mathcal{M}(x_i, y_{i, j})) + (1-r_{i, j})\log({1-\mathcal{M}(x_i, y_{i, j})})]
 $$
 
 수식을 보면, 기존 방식은 positive pair의 matching score가 높을 수록 좋고, negative pair의 matching score가 낮을수록 좋게끔 선정한 것에 비해
