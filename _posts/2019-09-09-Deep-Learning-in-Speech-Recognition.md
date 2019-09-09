@@ -15,7 +15,8 @@ tag:
 
 Speech Recognition에 대한 사전 지식이 없어서, [Stanford Seminar - Deep Learning in Speech Recognition](https://www.youtube.com/watch?v=RBgfLvAOrss) 을 들으면서 정리해봤습니다. 앞 부분은 배경 설명이라 29:52 부터 들으시면 될 것 같아요.
 
-가장 기본적은 SR은 'Jelinek et al 1976, Continuous Speech Recognition by Statistical Methods'에서 제시되었습니다. Word $W$가 있을 때, 이를 speaker가 말해서 오디오 $A$를 만들고, 이를 ASR 모델로 다시 $W'$ 를 복원하는 방식입니다.
+가장 기본적은 SR은 <Jelinek et al 1976, Continuous Speech Recognition by Statistical Methods>에서 제시되었습니다. Word $$W$$가 있을 때, 이를 speaker가 말해서 오디오 $$A$$를 만들고, 이를 ASR 모델로 다시 $$W'$$ 를 복원하는 방식입니다.
+
 $$
 \hat{W} = \arg\max_Wp(W|A) = \arg\max_W p(A|W)p(W) = \arg\max_W \{\ln p(A|W) + \ln p(W)\}
 $$
@@ -24,11 +25,12 @@ $$
 \hat{W}= \arg\max \{\lambda \ln p(A|W) + \ln p(W)\}
 $$
 
- 여기서 $\lambda \ln p(A|W)$은 Acoustic model이고, $\ln p(W)$은 Language model입니다. 이건 별로 안좋습니다.
+ 여기서 $$\lambda \ln p(A|W)$$은 Acoustic model이고, $$\ln p(W)$$은 Language model입니다. 이건 별로 안좋습니다.
 
 
 
 그 다음 단계로 넘어가기 전에, Language model을 다시 복습해보면, 어떤 word sequence의 등장 확률은 처음 단어가 들어갈 확률에다가 그전의 단어들이 주어졌을 때 다음 해당 단어가 등장할 조건부 확률을 계산하는 방식이지만, 편의상 n-gram으로 sequence를 잘라서, 그 전 n개의 단어들만 보고 다음 단어가 무엇이 나올 지를 예측합니다. 그 다음 Acoustic Model은 Hidden Markov Model이 기본이었습니다. 1990년대에 들어와서 SR에 인공신경망을 적용하려는 시도가 나타났는데요, 잘 안됬습니다 (ㅋㅋ...)
+
 
 ### 1. CD-GMM-HMM
 
