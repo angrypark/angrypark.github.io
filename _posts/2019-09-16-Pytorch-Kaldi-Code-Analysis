@@ -1,0 +1,40 @@
+---
+title: "Pytorch-kaldi Code Analysis"
+excerpt: Speech recognition 관련해서 좋은 repository인 pytorch-kaldi의 구조와 사용법을 정리해봤습니다.
+date: 2019-09-16
+layout: post
+category:
+
+- [Speech Recognition]
+- [Code Analysis]
+
+tag:
+
+- Speech Recognition
+- Code Analysis
+- Pytorch
+- Kaldi
+
+---
+
+End-to-End를 접근해보기 전에, 현재 가장 많이 쓰이고 있는 DNN-HMM 구조를 제대로 알아보는 게 중요하다고 생각해서, 이와 관련해서 유명하기도 하고, 성능도 제일 잘 나와있는 코드를 발견하여 이를 뜯어보면서 공부해보고자 합니다. 이 코드를 사용하면, MLP, CNN, LSTM, GRU, Li-GRU, SincNet 등과 같은 이미 나와있는 모델을 쉽게 가져다 쓸 수 있고, 학습과 검증, inference까지 쉽게 해볼 수 있다고 하네요. 다만 이 코드에서 다루는 구조는 음성 데이터를 Kaldi를 활용해 다양하게 전처리를 한 다음, 이를 Pytorch로 딥러닝 모델을 태우고, 마지막 결과값 또한 Kaldi로 후처리를 하여 결과값을 내놓는 방식입니다.
+
+![Imgur](https://imgur.com/59KUess.png)
+
+일단 이 포스트에서는 코드 구조가 어떻게 되있는 지 보고, 아주 작은 custom dataset에 대해 적용해보는걸 목표로 했습니다.
+
+
+
+# 1. Install
+
+실행시키기 위해서는 `pytorch >= 1.0 `, `kaldi`, `python == 3.7` 이 있어야 합니다. 제 로컬과 환경이 같아서 그대로 뒀지만, 같이 하려면 이에 맞는 docker를 만들어서 해보면 될 것 같습니다. 특히 kaldi 설치의 경우에는 [링크](http://kaldi-asr.org/) 에서 차례대로 따라가시면 쉽게 설치 됩니다. 마지막으로는 
+
+~~~bash
+git clone https://github.com/mravanelli/pytorch-kaldi
+pip install -r requirements.txt
+~~~
+
+을 하면 다운로드가 됩니다.
+
+
+
