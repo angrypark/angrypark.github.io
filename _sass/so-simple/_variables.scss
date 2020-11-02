@@ -6,14 +6,14 @@
 $small: 320px !default;
 $medium: 768px !default;
 $large: 1024px !default;
-$xlarge: 1200px !default;
+$xlarge: 1400px !default;
 
 /* Fluid type */
-$base-font-size: 14px !default;
+$base-font-size: 16px !default;
 $min-vw: $small !default;
 $max-vw: $xlarge !default;
-$min-font-size: 12px !default;
-$max-font-size: 16px !default;
+$min-font-size: 14px !default;
+$max-font-size: 18px !default;
 
 /* Calculate Modular Scale */
 $modular-scale-1: 1.067 !default; /* small */
