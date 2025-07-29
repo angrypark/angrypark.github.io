@@ -3,6 +3,44 @@ languageCode = 'ko-kr'
 title = '😠 Personal Blog'
 theme = 'PaperMod'
 
+# URL 설정
+[permalinks]
+  posts = "/posts/:year/:month/:contentbasename/"
+  pages = "/:contentbasename/"
+
+# URL 생성 설정
+[urls]
+  [urls.primary]
+    posts = "/posts/:year/:month/:contentbasename/"
+    pages = "/:contentbasename/"
+
+# 빌드 설정
+[build]
+  writeStats = true
+
+# 메뉴 설정
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "posts"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "tags"
+    name = "tags"
+    url = "/tags/"
+    weight = 20
+  [[menu.main]]
+    identifier = "categories"
+    name = "categories"
+    url = "/categories/"
+    weight = 30
+  [[menu.main]]
+    identifier = "about"
+    name = "about"
+    url = "/about/"
+    weight = 40
+
 # SEO 설정
 enableRobotsTXT = true
 enableGitInfo = true

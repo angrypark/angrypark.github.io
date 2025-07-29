@@ -6,6 +6,7 @@ draft = false
 tags = ["youtube-recommender-system", "item-recommendation", "two-tower-model"]
 categories = ["recommender-system"]
 language = "en"
+url = "/en/posts/2020/two-tower-model/"
 +++
 
 I first learned about this paper when Google Brain released the [Tensorflow Recommenders](https://github.com/tensorflow/recommenders) library last month. I focused on it because Google, which operates a massive recommendation system like YouTube, was releasing recommendation system-related code. The overall content is more detailed in the [Tensorflow Blog](https://blog.tensorflow.org/2020/09/introducing-tensorflow-recommenders.html), so please read it.

@@ -6,6 +6,7 @@ draft = false
 tags = ["attention", "nlp", "transformer", "neural-network"]
 categories = ["natural-language-processing"]
 language = "en"
+url = "/en/posts/2019/attention-in-nlp/"
 +++
 
 This post summarizes what attention is, focusing on several important papers and how it is used in NLP.

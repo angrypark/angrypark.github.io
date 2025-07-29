@@ -6,6 +6,7 @@ draft = false
 tags = ["multi-armed-bandit", "recommender-system", "reinforcement-learning"]
 categories = ["recommender-system"]
 language = "en"
+url = "/en/posts/2019/multi-armed-bandit/"
 +++
 
 Recently, while studying Recommender Systems, I thought I needed to study the field of Multi-armed bandit. I've summarized it based on [A Survey of Online Experiment Design with the Stochastic Multi-Armed Bandit](https://arxiv.org/abs/1510.00757).

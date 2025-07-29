@@ -6,6 +6,7 @@ draft = false
 tags = ["multi-armed-bandit", "recommender-system", "reinforcement-learning"]
 categories = ["recommender-system"]
 language = "ko"
+url = "/posts/2019/multi-armed-bandit/"
 +++
 
 최근 Recommendar System에 대해 공부하면서, Multi-armed bandit이라는 분야에 대해 공부할 필요가 있다고 생각하던 차에 [A Survey of Online Experiment Design with the Stochastic Multi-Armed Bandit](https://arxiv.org/abs/1510.00757)을 바탕으로 정리해보았습니다.
