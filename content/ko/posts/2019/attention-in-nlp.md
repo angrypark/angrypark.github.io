@@ -6,7 +6,7 @@ draft = false
 tags = ["attention", "nlp", "transformer", "neural-network"]
 categories = ["natural-language-processing"]
 language = "ko"
-url = "/posts/2019/attention-in-nlp/"
+url = "/ko/posts/2019/attention-in-nlp/"
 +++
 
 이 글에서는 attention이 무엇인지, 몇 개의 중요한 논문들을 중심으로 정리하고 NLP에서 어떻게 쓰이는 지를 정리해보았습니다.

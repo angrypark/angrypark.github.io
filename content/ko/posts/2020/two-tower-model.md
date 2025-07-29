@@ -6,7 +6,7 @@ draft = false
 tags = ["youtube-recommender-system", "item-recommendation", "two-tower-model", "recommender-system"]
 categories = ["recommender-system"]
 language = "ko"
-url = "/posts/2020/two-tower-model/"
+url = "/ko/posts/2020/two-tower-model/"
 +++
 
 이 논문을 처음 알게 된 것은 저번달에 Google Brain에서 [Tensorflow Recommenders](https://github.com/tensorflow/recommenders) 라는 라이브러리를 공개하면서 입니다. Youtube라는 거대한 추천시스템을 운영하고 있는 구글이 추천 시스템 관련 코드를 공개한다고 해서 집중해서 보게 되었습니다. 전체적인 내용은 [Tensorflow Blog](https://blog.tensorflow.org/2020/09/introducing-tensorflow-recommenders.html)에 더 자세히 나와있으니 읽어보시기 바랍니다.
