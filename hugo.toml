@@ -46,15 +46,27 @@ enableRobotsTXT = true
 enableGitInfo = true
 
 # 사이트맵 설정
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+# Taxonomies 설정 (카테고리와 태그 최적화)
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
 [markup.goldmark.renderer]
   hardWraps = false
   unsafe = true
 
 defaultContentLanguage = "ko"
+defaultContentLanguageInSubdir = false
 
 [languages]
   [languages.ko]
     languageName = "한국어"
+    languageCode = "ko-KR"
     weight = 1
     title = "😠 Personal Blog"
     contentDir = "content/ko"
@@ -71,12 +83,18 @@ defaultContentLanguage = "ko"
     defaultTheme = "auto"
     ShowLanguageSelector = true
     googleAnalytics = "G-DJRGZYRN4B"
+
+    # SEO 메타데이터
+    keywords = ["머신러닝", "추천시스템", "딥러닝", "NLP", "기술블로그"]
+    images = ["/images/og-image.jpg"]
+
       [languages.ko.params.homeInfoParams]
         Title = "안녕하세요 👋"
         Content = "AngryPark의 블로그에 오신 것을 환영합니다."
   
   [languages.en]
     languageName = "English"
+    languageCode = "en-US"
     weight = 2
     title = "😠 Personal Blog"
     contentDir = "content/en"
@@ -93,6 +111,11 @@ defaultContentLanguage = "ko"
     defaultTheme = "auto"
     ShowLanguageSelector = true
     googleAnalytics = "G-DJRGZYRN4B"
+
+    # SEO 메타데이터
+    keywords = ["machine learning", "recommender systems", "deep learning", "NLP", "tech blog"]
+    images = ["/images/og-image.jpg"]
+
       [languages.en.params.homeInfoParams]
         Title = "Hello 👋"
         Content = "Welcome to AngryPark's blog."
