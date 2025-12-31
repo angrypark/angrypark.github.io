@@ -1,27 +1,34 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
+import { defineConfig } from 'astro/config'
+import tailwindcss from '@tailwindcss/vite'
+import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
+import partytown from '@astrojs/partytown'
+import icon from 'astro-icon'
+import rehypeFigureTitle from 'rehype-figure-title'
+import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis'
+import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
+import { remarkModifiedTime } from './src/plugins/remark-modified-time.mjs'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://angrypark.github.io',
-  integrations: [mdx(), sitemap()],
-  markdown: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
-    shikiConfig: {
-      theme: 'github-dark',
-      wrap: true,
-    },
-  },
-  i18n: {
-    defaultLocale: 'ko',
-    locales: ['ko', 'en'],
-    routing: {
-      prefixDefaultLocale: true,
-    },
-  },
-});
+	site: 'https://angrypark.github.io',
+	integrations: [
+		mdx(),
+		sitemap(),
+		icon(),
+		partytown({
+			config: {
+				forward: ['dataLayer.push'],
+			},
+		}),
+	],
+	vite: {
+		plugins: [tailwindcss()],
+	},
+	markdown: {
+		remarkPlugins: [remarkReadingTime, remarkModifiedTime, remarkMath],
+		rehypePlugins: [rehypeFigureTitle, rehypeAccessibleEmojis, rehypeKatex],
+	},
+})
