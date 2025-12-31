@@ -1,8 +1,13 @@
-# Hugo default output directory
-/public/
+# Astro build output
+dist/
 
-# Hugo cache files
-.hugo_build.lock
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # OS generated files
 .DS_Store
@@ -20,32 +25,9 @@ Thumbs.db
 *.swo
 *~
 
-# Logs
-*.log
+# Environment variables
+.env
+.env.production
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# nyc test coverage
-.nyc_output
-
-# Dependency directories
-node_modules/
-
-# Optional npm cache directory
-.npm
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity 
+# TypeScript cache
+*.tsbuildinfo

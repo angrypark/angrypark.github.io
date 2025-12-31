@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => data.lang === 'ko' && !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="글 - AngryPark" description="머신러닝, 추천시스템, 딥러닝에 관한 기술 글 목록">
+  <section>
+    <h1>글</h1>
+
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <h3 class="post-title">
+            <a href={`/ko/posts/${post.id.replace('ko/', '')}/`}>{post.data.title}</a>
+          </h3>
+          <div class="post-meta">
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+          </div>
+          {post.data.description && (
+            <p class="post-description">{post.data.description}</p>
+          )}
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="post-tags">
+              {post.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-top: 0;
+  }
+</style>

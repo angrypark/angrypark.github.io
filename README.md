@@ -1,57 +1,43 @@
-# AngryPark Blog
+# Astro Starter Kit: Minimal
 
-Hugo와 PaperMod 테마를 사용하여 만든 개인 블로그입니다.
-
-## 기술 스택
-
-- **정적 사이트 생성기**: Hugo
-- **테마**: PaperMod
-- **배포**: GitHub Pages
-
-## 로컬 개발 환경
-
-### 사전 요구사항
-
-- Hugo 설치 (https://gohugo.io/installation/)
-
-### 실행 방법
-
-1. 저장소 클론
-```bash
-git clone https://github.com/angrypark/angrypark.github.io.git
-cd angrypark.github.io
+```sh
+npm create astro@latest -- --template minimal
 ```
 
-2. 서브모듈 업데이트
-```bash
-git submodule update --init --recursive
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+
+## 🚀 Project Structure
+
+Inside of your Astro project, you'll see the following folders and files:
+
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
 ```
 
-3. 로컬 서버 실행
-```bash
-hugo server --buildDrafts --buildFuture
-```
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-4. 브라우저에서 `http://localhost:1313` 접속
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-## 새 포스트 작성
+Any static assets, like images, can be placed in the `public/` directory.
 
-```bash
-hugo new posts/포스트-제목.md
-```
+## 🧞 Commands
 
-## 빌드
+All commands are run from the root of the project, from a terminal:
 
-```bash
-hugo
-```
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-빌드된 파일은 `public/` 디렉토리에 생성됩니다.
+## 👀 Want to learn more?
 
-## 배포
-
-GitHub Pages를 통해 자동 배포됩니다. `main` 브랜치에 푸시하면 자동으로 사이트가 업데이트됩니다.
-
-## 라이선스
-
-MIT License
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
