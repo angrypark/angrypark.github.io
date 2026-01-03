@@ -30,6 +30,7 @@ const {
 import BaseLayout from './BaseLayout.astro'
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
+import Giscus from '../components/Giscus.astro'
 
 const blogImages = import.meta.glob<{ default: ImageMetadata }>(
 	'/src/assets/blogimages/**/*.{jpeg,jpg,png,gif}'
@@ -117,7 +118,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 					<!-- Suggest edit -->
 					<div class="flex justify-between mt-16 gap-4 flex-wrap italic">
 						<a
-							href={`https://github.com/yashjawale/yashjawale.github.io/edit/main/src/content/blog/${slug}.md`}
+							href={`https://github.com/angrypark/angrypark.github.io/edit/main/src/content/blog/${slug}.md`}
 							target="_blank"
 							rel="noopener noreferrer"
 							class="hover:underline underline-offset-4 opacity-70 hover:opacity-100"
@@ -128,6 +129,9 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 							Last modified: {lastModified}
 						</p>
 					</div>
+
+					<!-- Comments -->
+					<Giscus />
 				</div>
 			</div>
 		</article>
