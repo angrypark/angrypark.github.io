@@ -9,6 +9,7 @@ import utc from 'dayjs/plugin/utc'
 dayjs.extend(utc)
 
 type Props = CollectionEntry<'blog'>['data'] & {
+	post: CollectionEntry<'blog'>
 	headings: MarkdownHeading[]
 	slug: string
 	remarkPluginFrontmatter: Record<string, string>
@@ -20,6 +21,7 @@ const {
 	pubDate,
 	updatedDate,
 	coverImageCredit,
+	post,
 	headings,
 	slug,
 	remarkPluginFrontmatter,
@@ -33,7 +35,7 @@ const blogImages = import.meta.glob<{ default: ImageMetadata }>(
 	'/src/assets/blogimages/**/*.{jpeg,jpg,png,gif}'
 )
 
-const coverImagePath = `/src/assets/blogimages/${slug}/cover.png`
+const coverImagePath = `/src/assets/blogimages/${post.id}/cover.png`
 
 const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 	.utc()

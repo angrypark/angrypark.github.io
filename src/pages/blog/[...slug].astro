@@ -29,6 +29,7 @@ const { Content, remarkPluginFrontmatter } = await render(post)
 
 <BlogPostLayout
 	{...post.data}
+	post={post}
 	headings={headings}
 	slug={slug}
 	remarkPluginFrontmatter={remarkPluginFrontmatter}

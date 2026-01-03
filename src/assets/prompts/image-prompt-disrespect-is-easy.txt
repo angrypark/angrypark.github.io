@@ -1,0 +1,21 @@
+A charming, cozy isometric 3D render in a claymation style, showing a miniature wooden desk diorama representing the contrast between easy criticism and the difficulty of understanding context.
+Clear separated layout (single scene, distinct zones):
+
+Center zone: a glowing computer monitor on the desk, screen showing an exponentially branching tree diagram or network visualization with countless small nodes and connections exploding outward, representing the infinite experimental possibilities (like hyperparameter combinations) that cannot all be tested.
+
+Left-front zone: a single tiny clay figure with one hand raised in a simple pointing gesture, standing alone with a straightforward pose, representing how easy it is to criticize ("why didn't you do this?"). The figure appears simple and direct, almost casual.
+
+Right-back zone: two tiny clay figures engaged in a more complex interaction - one figure is showing something on a small document to the other, while the second figure is looking thoughtfully with head slightly tilted, representing the effort required to understand context, constraints, and make respectful critique. Nearby, a small tangled thread or winding path made of soft clay, suggesting the complexity of understanding someone's situation and decision-making context.
+
+No overlap & strong spacing rules:
+
+Keep each zone visually isolated with clean negative space between zones (at least a few centimeters in miniature scale).
+No object touching or overlapping another zone; all major elements must be fully visible.
+No text labels or captions (text-free design as requested).
+
+Camera & composition (RIGHT-BOTTOM viewing angle):
+
+Isometric 3/4 top-down view, rotated so the camera is positioned toward the upper-left of the desk and looking down toward the lower-right (bottom-right).
+The desk's perspective should emphasize the bottom-right corner as the foreground (closest to camera).
+Centered composition, crisp separation of zones, consistent scale and handcrafted clay texture; cool, diffused studio lighting with subtle directional shadows. The background is a deep charcoal gray or dark navy surface, creating a sophisticated, contemplative atmosphere. Clay objects feature a more muted, rich color palette: deep teal, burgundy, ochre, sage green, and charcoal-gray clay with subtle matte finish. The wooden desk has a darker, more weathered tone (dark walnut or charcoal-stained wood). The left zone should feel slightly more sparse and simple, while the right zone should feel more complex and layered, creating a visual contrast. Overall mood: thoughtful, restrained, and sophisticated rather than cozy and warm.
+
