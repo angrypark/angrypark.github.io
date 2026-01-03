@@ -1,0 +1,36 @@
+---
+// Google AdSense component
+// https://adsense.google.com
+
+interface Props {
+	slot: 'sidebar' | 'in-article'
+}
+
+const { slot } = Astro.props
+---
+
+<div class="adsense-container my-8">
+	{
+		slot === 'sidebar' ? (
+			<ins
+				class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-3879348875165381"
+				data-ad-format="auto"
+				data-full-width-responsive="true"
+			/>
+		) : (
+			<ins
+				class="adsbygoogle"
+				style="display:block; text-align:center;"
+				data-ad-layout="in-article"
+				data-ad-format="fluid"
+				data-ad-client="ca-pub-3879348875165381"
+			/>
+		)
+	}
+</div>
+
+<script is:inline>
+	(adsbygoogle = window.adsbygoogle || []).push({})
+</script>

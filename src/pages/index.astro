@@ -4,6 +4,7 @@ import { SITE_BASE, SocialLinks } from '../consts'
 import { Icon } from 'astro-icon/components'
 import BlogCard from '../components/BlogCard.astro'
 import { getCollection } from 'astro:content'
+import AdSense from '../components/AdSense.astro'
 
 const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -80,5 +81,10 @@ const posts = (await getCollection('blog'))
 				</a>
 			</div>
 		</div>
+	</section>
+
+	<!-- Ad -->
+	<section class="app-container py-8">
+		<AdSense slot="in-article" />
 	</section>
 </BaseLayout>
